@@ -31,7 +31,7 @@ const extraItem = (item, amount) => {
     return itemJson;
 }
 
-ServerEvents.recipes(event => {
+ServerEvents.highPriorityData(event => {
     /**
      * Creates a Spirit Infusion recipe.
      *
@@ -48,7 +48,7 @@ ServerEvents.recipes(event => {
         } else if (inputCount > 1) {
             inputJson = {"item": input, "count": inputCount};
         }
-        event.custom({
+        event.addJson(`kubejs:spirit_infusion/${output}`,{
             "type": "malum:spirit_infusion",
             "input": inputJson,
             "output": {
@@ -72,5 +72,9 @@ ServerEvents.recipes(event => {
             earthenSpirit(64)
         ]
     );
+})
+
+ServerEvents.recipes(event => {
+    // bingus
 })
 
