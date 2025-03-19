@@ -48,7 +48,8 @@ ServerEvents.highPriorityData(event => {
         } else if (inputCount > 1) {
             inputJson = {"item": input, "count": inputCount};
         }
-        event.addJson(`kubejs:spirit_infusion/${output}`,{
+        let recipeName = output.split(":")[1]
+        event.addJson(`kubejs:spirit_infusion/${recipeName}`,{
             "type": "malum:spirit_infusion",
             "input": inputJson,
             "output": {
