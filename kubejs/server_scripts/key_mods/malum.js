@@ -35,30 +35,34 @@ ServerEvents.highPriorityData(event => {
     /**
      * Creates a Spirit Infusion recipe.
      *
-     * @param {string} input The input item, in ResourceLocation format
-     * @param {number} inputCount 1-64 items (don't be stupid)
-     * @param {string} output The output item, in ResourceLocation format.
-     * @param {Array} extra_items A Json Array of the extra items required for this infusion recipe. (use {@link extraItem} where possible to represent individual items)
+     * @param {string} inputItem The input item, in ResourceLocation format
+     * @param {number} inputAmount 1-64 items (don't be stupid)
+     * @param {string} outputItem The output item, in ResourceLocation format.
+     * @param {Array} extraItems A Json Array of the extra items required for this infusion recipe. (use {@link extraItem} where possible to represent individual items)
      * @param {Array} spirits A Json Array of spirits required for the infusion recipe (use the spirit functions at the top of this file, whereever possible. )
      */
-    let spiritInfusion = (input, inputCount, output, extra_items, spirits) => {
+    let spiritInfusion = (inputItem, inputAmount, outputItem, extraItems, spirits) => {
         let inputJson = {};
-        if (inputCount == 1) {
-            inputJson = {"item": input};
-        } else if (inputCount > 1) {
-            inputJson = {"item": input, "count": inputCount};
+        if (inputAmount == 1) {
+            inputJson = {"item": inputItem};
+        } else if (inputAmount > 1) {
+            inputJson = {"item": inputItem, "count": inputAmount};
         }
-        let recipeName = output.split(":")[1]
-        event.addJson(`kubejs:spirit_infusion/${recipeName}`,{
-            "type": "malum:spirit_infusion",
-            "input": inputJson,
-            "output": {
-                "item": `${output}`
-            },
-            "extra_items": extra_items,
-            "spirits": spirits
-        });
-        console.log("Attempted to register recipe for '"+output+"'")
+        let recipeName = outputItem.split(":")[1]
+        try {
+            console.log("Attempting to register Spirit Infusion recipe for '"+outputItem+"'")
+            event.addJson(`kubejs:spirit_infusion/${recipeName}`,{
+                "type": "malum:spirit_infusion",
+                "input": inputJson,
+                "output": {
+                    "item": `${outputItem}`
+                },
+                "extra_items": extraItems,
+                "spirits": spirits
+            });
+        } catch(err) {
+            console.error("Something went wrong!", err)
+        }
     }
 
     spiritInfusion("occultism:dimensional_matrix", 1, "kubejs:computation_matrix",
@@ -73,9 +77,37 @@ ServerEvents.highPriorityData(event => {
             earthenSpirit(64)
         ]
     );
+
+    event.addJson(`kubejs:spirit_infusion/computation_matrix`, {
+        "type": "malum:spirit_infusion",
+        "extra_items": [
+            {
+                "item": "kubejs:raw_logic_bucket",
+                "count": 1
+            },
+            {
+                "item": "kubejs:abstruse_mechanism",
+                "count": 64
+            }
+        ],
+        "input": {
+            "count": 1,
+            "item": "occultism:dimensional_matrix"
+        },
+        "output": {
+            "item": "kubejs:computational_matrix"
+        },
+        "spirits": [
+            {
+                "type": "eldritch",
+                "count": 64
+            }
+        ]
+    });
 })
 
 ServerEvents.recipes(event => {
+    event.recipes.malum
     // bingus
 })
 
