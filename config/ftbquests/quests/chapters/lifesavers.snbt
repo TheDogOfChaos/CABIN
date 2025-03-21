@@ -166,7 +166,7 @@
 			id: "6D7D504E9DC22590"
 			rewards: [{
 				id: "12B2F2F9A6A257FE"
-				item: "forbidden_arcanus:ender_pearl_fragment"
+				item: "minecraft:ender_pearl"
 				type: "item"
 			}]
 			tasks: [{

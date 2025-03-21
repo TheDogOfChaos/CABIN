@@ -9,8 +9,8 @@
     "info.thermal.machine_sawmill.0": "Extrae automáticamente los reactivos de su cristal.",
     "block.thermal.machine_sawmill": "Extractor de Reactivos",
     "item.thermal.raw_lead": "Plomo en Bruto Concentrado",
-    "info.thermal.machine_sawmill.1": "",
+    "info.thermal.machine_sawmill.1": "A pesar de su aspecto, no es un aserradero.",
     "info.thermal.machine_press.0": "Cambia automáticamente objetos por monedas y viceversa.",
     "block.thermal.machine_frame": "Máquina de Invar",
-    "info.thermal.machine_sawmill.2": ""
+    "info.thermal.machine_sawmill.2": "¡Innovación!"
 }

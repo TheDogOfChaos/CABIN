@@ -295,7 +295,6 @@ ServerEvents.recipes(event => {
             { type: 'minecraft:blasting', input: rawOreTag },
             { type: 'create:crushing', input: rawOreTag },
             { type: 'occultism:crushing', input: rawOreTag },
-            { type: 'forbidden_arcanus:clibano_combustion', input: rawOreTag },
             { type: 'tconstruct:ore_melting', input: rawOreTag }
         ])
 
@@ -310,7 +309,7 @@ ServerEvents.recipes(event => {
             { type: "create:crushing", input: oreTag },
             { type: "create:milling", input: oreTag },
             { type: "occultism:crushing", input: oreTag },
-            { type: "forbidden_arcanus:clibano_combustion", input: oreTag }
+
         ])
         
         event.remove({ id: `thermal:machines/pulverizer/pulverizer_${materialName}_ore` })
@@ -391,7 +390,6 @@ ServerEvents.recipes(event => {
         { type: 'minecraft:blasting', input: "#forge:raw_materials/silver" },
         { type: 'create:crushing', input: "#forge:raw_materials/silver" },
         { type: 'occultism:crushing', input: "#forge:raw_materials/silver" },
-        { type: 'forbidden_arcanus:clibano_combustion', input: "#forge:raw_materials/silver" },
         { type: 'tconstruct:ore_melting', input: "#forge:raw_materials/silver" }
     ])
     event.remove({ id: `thermal:machines/pulverizer/pulverizer_raw_silver`})

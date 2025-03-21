@@ -27,10 +27,10 @@ ServerEvents.recipes(event => {
     const sophStorageMaterials = [
         ["", null, null],
         // ["copper_", "tconstruct:steel_ingot", "lead"],
-        ["iron_", "thermal:bronze_ingot", "lead"],
-        ["gold_", "thermal:invar_ingot", "tin"],
-        ["diamond_", "tconstruct:manyullyn_ingot", "copper"],
-        ["netherite_", "forbidden_arcanus:dark_rune", "gold"],
+        ["iron_", "thermal:bronze_ingot"],
+        ["gold_", "thermal:invar_ingot"],
+        ["diamond_", "tconstruct:slimesteel_ingot"],
+        ["netherite_", "tconstruct:manyullyn_ingot"],
     ]
     const sophStorageTypes = [
         ["", "barrel"],

@@ -2,9 +2,6 @@ ServerEvents.recipes(event => {
     let stone = Item.of(MC("cobblestone"), 1).withChance(.5)
     let experience = Item.of(CR("experience_nugget"), 1).withChance(0.75)
 
-    event.recipes.createCrushing([Item.of("forbidden_arcanus:stellarite_piece", 1), Item.of("forbidden_arcanus:stellarite_piece", 1).withChance(.25), experience, stone], "forbidden_arcanus:stella_arcanum")
-    event.recipes.createCrushing([Item.of("forbidden_arcanus:xpetrified_orb", 2), Item.of("forbidden_arcanus:xpetrified_orb", 1).withChance(.25), experience,stone], "forbidden_arcanus:xpetrified_ore")
-    event.recipes.createCrushing([Item.of("forbidden_arcanus:arcane_crystal", 2), Item.of("forbidden_arcanus:arcane_crystal_dust", 1).withChance(.25), experience,stone], "forbidden_arcanus:arcane_crystal_ore")
     event.recipes.createCrushing([Item.of(TE("sapphire"), 2), Item.of(TE("sapphire"), 1).withChance(.25), experience,stone], TE("sapphire_ore"))
     event.recipes.createCrushing([Item.of(TE("ruby"), 2), Item.of(TE("ruby"), 1).withChance(.25), experience,stone], TE("ruby_ore"))
 
@@ -30,6 +27,5 @@ ServerEvents.recipes(event => {
     recompact(F("#dusts/niter"), TE("niter"))
     recompact(F("#dusts/sapphire"), TE("sapphire"))
     recompact(F("#dusts/ruby"), TE("ruby"))
-    recompact(F("#dusts/arcane_crystal"), "forbidden_arcanus:arcane_crystal")
     recompact(F("#dusts/quartz"), MC("quartz"))
 })

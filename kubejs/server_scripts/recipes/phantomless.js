@@ -1,7 +1,5 @@
 ServerEvents.recipes(event => {
     // phantom membrane alternatives
-    event.replaceInput({ id: "forbidden_arcanus:mundabitur_dust" }, MC("phantom_membrane"), TE("apatite_dust"))
-
     if(Platform.isLoaded("railways")) {
         event.recipes.createFilling("railways:track_phantom", [CR("track"), Fluid.of(CR("potion"), 50, '{Potion:"minecraft:invisibility"}')])
         event.recipes.createFilling("railways:track_phantom", [CR("track"), Fluid.of(CR("potion"), 50, '{Potion:"minecraft:long_invisibility"}')])

@@ -19,8 +19,6 @@ ServerEvents.tags("item", event => {
         event.get("kubejs:transaction_cards/profession").add(`kubejs:profession_card_${element}`)
     });
 
-    event.get("farmersdelight:offhand_equipment").add("forbidden_arcanus:obsidian_skull_shield")
-
     unregistered_axes.forEach(axe => {
         event.get("forge:tools/axes").add(axe)
     });

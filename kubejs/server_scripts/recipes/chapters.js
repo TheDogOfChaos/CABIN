@@ -486,8 +486,8 @@ ServerEvents.recipes(event => {
 
     // - - - - - Chapter 2A - - - - -
     // Vine Transmutation
-    donutCraft(event, MC("weeping_vines"), "forbidden_arcanus:rune", MC("twisting_vines"))
-    donutCraft(event, MC("twisting_vines"), "forbidden_arcanus:rune", MC("weeping_vines"))
+    donutCraft(event, MC("weeping_vines"), "ae2:fluix_crystal", MC("twisting_vines"))
+    donutCraft(event, MC("twisting_vines"), "ae2:fluix_crystal", MC("weeping_vines"))
     // Liquid soul sand
     event.remove({ id: TC("smeltery/melting/soul/sand") })
     event.recipes.createMixing(Fluid.of(TC("liquid_soul"), 500), [MC("twisting_vines"), MC("weeping_vines")]).heated()
@@ -650,9 +650,9 @@ ServerEvents.recipes(event => {
     let fern1 = KJ("ender_slimy_fern_leaf")
     let fern2 = KJ("sky_slimy_fern_leaf")
     let fern3 = KJ("earth_slimy_fern_leaf")
-    event.shapeless(fern1, ["forbidden_arcanus:rune", fern2, fern2, fern2, fern2, fern3, fern3, fern3, fern3])
-    event.shapeless(fern2, ["forbidden_arcanus:rune", fern3, fern3, fern3, fern3, fern1, fern1, fern1, fern1])
-    event.shapeless(fern3, ["forbidden_arcanus:rune", fern2, fern2, fern2, fern2, fern1, fern1, fern1, fern1])
+    event.shapeless(fern1, ["ae2:fluix_crystal", fern2, fern2, fern2, fern2, fern3, fern3, fern3, fern3])
+    event.shapeless(fern2, ["ae2:fluix_crystal", fern3, fern3, fern3, fern3, fern1, fern1, fern1, fern1])
+    event.shapeless(fern3, ["ae2:fluix_crystal", fern2, fern2, fern2, fern2, fern1, fern1, fern1, fern1])
     // Fern Cutting
     let chop = (type, output) => {
         event.custom({
@@ -750,7 +750,7 @@ ServerEvents.recipes(event => {
     invarMachine(event, Item.of(TE("dynamo_compression"), 1), TE("rf_coil"))
     invarMachine(event, Item.of("kubejs:pipe_module_tier_2", 4))
     // Disenchantment Upgrade
-    createMachine(TE("dynamo_compression"), event, Item.of(TE("dynamo_disenchantment"), 1), "forbidden_arcanus:rune")
+    createMachine(TE("dynamo_compression"), event, Item.of(TE("dynamo_disenchantment"), 1), "ae2:fluix_crystal")
     // Default thermal machine recipes are kept in.
     // Check older versions of the script to see commented out code for thermal machine crafting recipes
 

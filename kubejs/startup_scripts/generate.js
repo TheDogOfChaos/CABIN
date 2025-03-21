@@ -277,7 +277,7 @@ StartupEvents.registry("block", event => {
     reagent(0x535353, 0x717171, "gunpowder", "Gunpowder", "minecraft:gunpowder")
     reagent(0x529680, 0xA2CFC0, "prismarine", "Aquatic", "minecraft:prismarine_shard")
     category()
-    reagent(0x9E72BE, 0xB7C9D1, "arcane", "Arcane", "#forge:dusts/arcane_crystal", "forbidden_arcanus:arcane_crystal_dust")
+    reagent(0x8F5CCB, 0xBE8EF4, "fluix", "Fluix", "ae2:fluix_dust", "ae2:fluix_dust")
     reagent(0x27A9BB, 0x2CC7C9, "apatite", "Apatite", "#forge:dusts/apatite", "thermal:apatite_dust")
     reagent(0xC7A94A, 0xEEF071, "sulfur", "Sulfuric", "#forge:dusts/sulfur", "thermal:sulfur_dust")
     reagent(0x735A65, 0xB8AFAF, "niter", "Nitric", "#forge:dusts/niter", "thermal:niter_dust")
