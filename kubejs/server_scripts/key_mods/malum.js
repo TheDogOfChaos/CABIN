@@ -64,7 +64,7 @@ ServerEvents.recipes(event => {
     spiritInfusion("occultism:dimensional_matrix", 1, "kubejs:computation_matrix",
         [
             extraItem("kubejs:raw_logic_bucket", 1),
-            extraItem("kubejs:abtruse_mechanism", 64)
+            extraItem("kubejs:abstruse_mechanism", 64)
         ],
         [
             eldritchSpirit(64),
@@ -73,33 +73,6 @@ ServerEvents.recipes(event => {
             earthenSpirit(64)
         ]
     );
-
-    event.custom({
-        "type": "malum:spirit_infusion",
-        "extra_items": [
-            {
-                "item": "kubejs:raw_logic_bucket",
-                "count": 1
-            },
-            {
-                "item": "kubejs:abstruse_mechanism",
-                "count": 64
-            }
-        ],
-        "input": {
-            "count": 1,
-            "item": "occultism:dimensional_matrix"
-        },
-        "output": {
-            "item": "kubejs:computational_matrix"
-        },
-        "spirits": [
-            {
-                "type": "eldritch",
-                "count": 64
-            }
-        ]
-    });
 })
 
 ServerEvents.recipes(event => {
