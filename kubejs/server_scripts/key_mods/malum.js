@@ -49,20 +49,16 @@ ServerEvents.recipes(event => {
             inputJson = {"item": inputItem, "count": inputAmount};
         }
         let recipeName = outputItem.split(":")[1]
-        try {
-            console.log("Attempting to register Spirit Infusion recipe for '"+outputItem+"'")
-            event.custom(`kubejs:spirit_infusion/${recipeName}`,{
-                "type": "malum:spirit_infusion",
-                "input": inputJson,
-                "output": {
-                    "item": `${outputItem}`
-                },
-                "extra_items": extraItems,
-                "spirits": spirits
-            });
-        } catch(err) {
-            console.error("Something went wrong!", err)
-        }
+        console.log("Attempting to register Spirit Infusion recipe for '"+outputItem+"'")
+        event.custom({
+            "type": "malum:spirit_infusion",
+            "input": inputJson,
+            "output": {
+                "item": `${outputItem}`
+            },
+            "extra_items": extraItems,
+            "spirits": spirits
+        });
     }
 
     spiritInfusion("occultism:dimensional_matrix", 1, "kubejs:computation_matrix",
@@ -78,7 +74,7 @@ ServerEvents.recipes(event => {
         ]
     );
 
-    event.custom(`kubejs:spirit_infusion/computation_matrix`, {
+    event.custom({
         "type": "malum:spirit_infusion",
         "extra_items": [
             {
