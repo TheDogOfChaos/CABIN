@@ -31,7 +31,7 @@ const extraItem = (item, amount) => {
     return itemJson;
 }
 
-ServerEvents.highPriorityData(event => {
+ServerEvents.recipes(event => {
     /**
      * Creates a Spirit Infusion recipe.
      *
@@ -51,7 +51,7 @@ ServerEvents.highPriorityData(event => {
         let recipeName = outputItem.split(":")[1]
         try {
             console.log("Attempting to register Spirit Infusion recipe for '"+outputItem+"'")
-            event.addJson(`kubejs:spirit_infusion/${recipeName}`,{
+            event.custom(`kubejs:spirit_infusion/${recipeName}`,{
                 "type": "malum:spirit_infusion",
                 "input": inputJson,
                 "output": {
@@ -78,7 +78,7 @@ ServerEvents.highPriorityData(event => {
         ]
     );
 
-    event.addJson(`kubejs:spirit_infusion/computation_matrix`, {
+    event.custom(`kubejs:spirit_infusion/computation_matrix`, {
         "type": "malum:spirit_infusion",
         "extra_items": [
             {

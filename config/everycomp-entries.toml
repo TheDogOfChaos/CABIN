@@ -36,15 +36,14 @@
 			bloodshroom = true
 			enderbark = true
 
-		[types.wood_type.forbidden_arcanus]
-			fungyss = true
-			aurum = true
-			edelwood = true
-
 		[types.wood_type.ad_astra]
 			aeronos = true
 			strophar = true
 			glacian = true
+
+		[types.wood_type.malum]
+			runewood = true
+			soulwood = true
 
 	[types.leaves_type]
 
@@ -82,10 +81,6 @@
 			sky_slime = true
 			ender_slime = true
 
-		[types.leaves_type.forbidden_arcanus]
-			aurum = true
-			nuggety_aurum = true
-
 		[types.leaves_type.quark]
 			ancient = true
 			blue_blossom = true
@@ -100,6 +95,12 @@
 		[types.leaves_type.ad_astra]
 			glacian = true
 
+		[types.leaves_type.malum]
+			runewood = true
+			azure_runewood = true
+			soulwood = true
+			budding_soulwood = true
+
 #Disables specific entries
 [entries]
 
@@ -111,15 +112,6 @@
 			board_slab = true
 			boards = true
 			board_wall = true
-
-		[entries.wood_type.storagedrawers]
-			trim = true
-			full_drawers_2 = true
-			half_drawers_1 = true
-			full_drawers_4 = true
-			half_drawers_4 = true
-			half_drawers_2 = true
-			full_drawers_1 = true
 
 		[entries.wood_type.decorative_blocks]
 			beam = true
@@ -144,6 +136,11 @@
 			stripped_post = true
 			ladder = true
 			vertical_slab = true
+
+		[entries.wood_type.functionalstorage]
+			1 = true
+			4 = true
+			2 = true
 
 	[entries.leaves_type]
 
