@@ -274,6 +274,7 @@ ServerEvents.recipes(event => {
     let dust_process = (materialName, byproduct, ByproductName) => {
         let crushedOre = CR("crushed_" + "raw_" + materialName)
         let oreTag = ("#forge:ores/" + materialName)
+        let oreBlockTag = ("#forge:storage_blocks/raw_" + materialName)
         let dustTag = ("#forge:dusts/" + materialName)
         let fluid = TC("molten_" + materialName)
         let fluidByproduct = TC("molten_" + ByproductName)
@@ -302,20 +303,26 @@ ServerEvents.recipes(event => {
         event.remove({ id: `thermal:machines/smelter/smelter_raw_${materialName}`})
         
         event.remove([
-            { type: TE("smelter"), input: oreTag },
-            { type: TE("pulverizer"), input: oreTag },
-            { type: MC("blasting"), input: oreTag },
-            { type: MC("smelting"), input: oreTag },
-            { type: CR("crushing"), input: oreTag },
-            { type: CR("milling"), input: oreTag }
+            { type: "thermal:smelter", input: oreTag },
+            { type: "thermal:pulverizer", input: oreTag },
+            { type: "minecraft:blasting", input: oreTag },
+            { type: "minecraft:smelting", input: oreTag },
+            { type: "create:crushing", input: oreTag },
+            { type: "create:milling", input: oreTag },
+            { type: "occultism:crushing", input: oreTag },
+            { type: "forbidden_arcanus:clibano_combustion", input: oreTag }
         ])
         
-        event.remove({ id: TC("smeltery/melting/metal/" + materialName + "/raw_block") })
-        event.remove({ id: TC("smeltery/melting/metal/" + materialName + "/dust") })
-        event.remove({ id: CR("crushing/raw_" + materialName + "_block") })
-
         event.remove({ id: `thermal:machines/pulverizer/pulverizer_${materialName}_ore` })
+        event.remove({ id: `thermal:machines/smelter/smelter_${materialName}_ore` })
 
+        event.remove([
+            { type: 'minecraft:smelting', input: oreBlockTag },
+            { type: 'minecraft:blasting', input: oreBlockTag },
+            { type: 'create:crushing', input: oreBlockTag },
+            { type: 'occultism:crushing', input: oreBlockTag },
+            { type: 'tconstruct:ore_melting', input: oreBlockTag }
+        ])
 
         // 'concentrated ore' to crushed ore
         event.recipes.createMilling([Item.of(crushedOre, 5)], rawOreTag).id("kubejs:ore_processing/milling/raw_ore/" + materialName)
@@ -324,6 +331,7 @@ ServerEvents.recipes(event => {
         // ore to crushed ore
         event.recipes.createCrushing([Item.of(crushedOre, 3), Item.of(crushedOre, 1).withChance(0.5), experience, stone], oreTag).id("kubejs:ore_processing/crushing/ore/" + materialName)
         thermalPulverizer(event, [Item.of(crushedOre).withChance(4.5), Item.of("minecraft:gravel").withChance(0.2)], oreTag, 3000).id("kubejs:ore_processing/pulverizing/ore/" + materialName)
+        event.recipes.occultism.crushing(Item.of(dust, 3), Item.of(crushedOre), 200, -1, false).id(`kubejs:occultism/crushing/${materialName}`)
 
         // crushed ore to nuggets
         event.smelting(Item.of(nugget, 3), crushedOre).id("kubejs:ore_processing/smelting/crushed/" + materialName)

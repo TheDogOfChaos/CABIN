@@ -95,9 +95,7 @@ ServerEvents.recipes(event => {
     enderiumMachine(event, Item.of("sophisticatedstorage:controller", 1), "functionalstorage:controller_extension")
     leadMachine(event, Item.of("sophisticatedstorage:storage_input", 1))
     leadMachine(event, Item.of("sophisticatedstorage:storage_output", 1))
-    event.remove({ id: "sophisticatedbackpacks:inception_upgrade"})
-    event.remove({ id: "sophisticatedbackpacks:inception_upgrade"})
-
+    
     // Stack upgrades
     let stackupgrade = [
         ["stack_upgrade_tier_1", "create:brass_ingot", "upgrade_base"],
@@ -105,22 +103,23 @@ ServerEvents.recipes(event => {
         ["stack_upgrade_tier_3", "thermal:enderium_ingot", "stack_upgrade_tier_2"],
         ["stack_upgrade_tier_4", "kubejs:calculation_mechanism", "stack_upgrade_tier_3"]
     ]
-    event.remove({ output: "sophisticatedbackpacks:stack_upgrade_starter_tier" })
+    let upgradepattern = 
     event.remove({ output: "sophisticatedstorage:stack_upgrade_tier_1_plus" })
-
+    
     stackupgrade.forEach(material => {
         modids.forEach(mod => {
             event.remove({ output: `${mod}:${material[0]}` })
-            event.shaped(`${mod}:${material[0]}`, [
-                "III",
-                "IUI",
-                "III"
-            ], {
-                I: `${material[1]}`,
-                U: `${mod}:${material[2]}`
-            })
+            donutCraft(event, `${mod}:${material[0]}`, `${mod}:${material[2]}`, `${material[1]}`)
         })
     })
+
+    //Sophisticated Backpacks starter upgrades
+    event.remove({ output: "sophisticatedbackpacks:stack_upgrade_starter_tier" })
+    donutCraft(event, "sophisticatedbackpacks:stack_upgrade_starter_tier", "sophisticatedbackpacks:upgrade_base", "create:andesite_alloy")
+    donutCraft(event, "sophisticatedbackpacks:stack_upgrade_tier_1", "sophisticatedbackpacks:stack_upgrade_starter_tier", "create:brass_ingot")
+    
+    event.remove({ id: "sophisticatedbackpacks:inception_upgrade"})
+    event.remove({ id: "sophisticatedbackpacks:stack_upgrade_omega_tier"})
 
     event.remove({ output: "sophisticatedstorage:stack_upgrade_tier_5" })
     event.remove({ output: "sophisticatedstorage:stack_upgrade_omega_tier" })

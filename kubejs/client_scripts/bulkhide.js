@@ -5,7 +5,7 @@ JEIEvents.hideItems(event => {
     event.hide("sophisticatedstorage:copper_shulker_box")
     event.hide(/^sophisticatedstorage:.*copper.*tier_upgrade$/)
     event.hide("sophisticatedstorage:stack_upgrade_tier_1_plus")
-    event.hide("sophisticatedbackpacks:stack_upgrade_starter_tier")
+    event.hide("sophisticatedbackpacks:stack_upgrade_omega_tier")
     event.hide(/xp_pump_upgrade/)
 
     event.hide(/itemfilters/)
