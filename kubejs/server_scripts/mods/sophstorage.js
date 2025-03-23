@@ -2,7 +2,7 @@
  * Configuration of Sophisticated Storage
  */
 ServerEvents.recipes(event => {
-    const modids = ["sophisticatedstorage", "sophisticatedbackpacks"]
+    //const modids = ["sophisticatedstorage", "sophisticatedbackpacks"]
 
     // Remove XP pump upgrades
     event.remove({ id: "sophisticatedstorage:xp_pump_upgrade" })
@@ -27,10 +27,10 @@ ServerEvents.recipes(event => {
     const sophStorageMaterials = [
         ["", null, null],
         // ["copper_", "tconstruct:steel_ingot", "lead"],
-        ["iron_", "thermal:bronze_ingot"],
-        ["gold_", "thermal:invar_ingot"],
-        ["diamond_", "tconstruct:slimesteel_ingot"],
-        ["netherite_", "tconstruct:manyullyn_ingot"],
+        ["iron_", "thermal:bronze_nugget"],
+        ["gold_", "thermal:invar_nugget"],
+        ["diamond_", "tconstruct:slimesteel_nugget"],
+        ["netherite_", "tconstruct:manyullyn_nugget"],
     ]
     const sophStorageTypes = [
         ["", "barrel"],
@@ -47,14 +47,12 @@ ServerEvents.recipes(event => {
             let prevTierName = (toIndex - 1 == 0 ? "basic_" : sophStorageMaterials[toIndex - 1][0]);
             let toTierName = material[0];
 
-            event.shaped(`sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`, [
-                "III",
-                "ICI",
-                "III"
-            ], {
-                I: `${material[1]}`,
-                C: (fromTierName == prevTierName ? "minecraft:redstone_torch" : `sophisticatedstorage:${fromTierName}to_${prevTierName}tier_upgrade`)
-            }).id(`sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`)
+            donutCraft(
+                event,
+                `sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`,
+                (fromTierName == prevTierName ? "minecraft:redstone_torch" : `sophisticatedstorage:${fromTierName}to_${prevTierName}tier_upgrade`),
+                material[1]
+            ).id(`sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`)
         }
 
         // Barrel-in-table upgrades
@@ -98,33 +96,40 @@ ServerEvents.recipes(event => {
     
     // Stack upgrades
     let stackupgrade = [
+        ["", "create:andesite_alloy", ""],
         ["stack_upgrade_tier_1", "create:brass_ingot", "upgrade_base"],
         ["stack_upgrade_tier_2", "thermal:invar_ingot", "stack_upgrade_tier_1"],
         ["stack_upgrade_tier_3", "thermal:enderium_ingot", "stack_upgrade_tier_2"],
         ["stack_upgrade_tier_4", "kubejs:calculation_mechanism", "stack_upgrade_tier_3"]
     ]
-    let upgradepattern = 
+
     event.remove({ output: "sophisticatedstorage:stack_upgrade_tier_1_plus" })
     
-    stackupgrade.forEach(material => {
-        modids.forEach(mod => {
-            event.remove({ output: `${mod}:${material[0]}` })
-            donutCraft(event, `${mod}:${material[0]}`, `${mod}:${material[2]}`, `${material[1]}`)
-        })
-    })
+    for (let i=1;i<stackupgrade.length;++i) {
+        let upgrade = stackupgrade[i][0]
+        let baseUpgrade = stackupgrade[i][2]
 
-    //Sophisticated Backpacks starter upgrades
+        let ingredient = stackupgrade[i][1]
+        let previousIngredient = stackupgrade[i-1][1]
+
+        event.remove({ output: `sophisticatedstorage:${upgrade}` })
+        donutCraft(event, `sophisticatedstorage:${upgrade}`, `sophisticatedstorage:${baseUpgrade}`, `${previousIngredient}`)
+        event.remove({ output: `sophisticatedbackpacks:${upgrade}` })
+        donutCraft(event, `sophisticatedbackpacks:${upgrade}`, `sophisticatedbackpacks:${baseUpgrade}`, `${ingredient}`)
+    }
+
+    //Sophisticated Backpacks starter upgrade
     event.remove({ output: "sophisticatedbackpacks:stack_upgrade_starter_tier" })
     donutCraft(event, "sophisticatedbackpacks:stack_upgrade_starter_tier", "sophisticatedbackpacks:upgrade_base", "create:andesite_alloy")
     donutCraft(event, "sophisticatedbackpacks:stack_upgrade_tier_1", "sophisticatedbackpacks:stack_upgrade_starter_tier", "create:brass_ingot")
-    
+    //Sophisticated Storage tier 5 upgrade
+    event.remove({ output: "sophisticatedstorage:stack_upgrade_tier_5" })
+    donutCraft(event, `sophisticatedstorage:stack_upgrade_tier_5`, `sophisticatedstorage:stack_upgrade_tier_4`, "kubejs:calculation_mechanism")
+
     event.remove({ id: "sophisticatedbackpacks:inception_upgrade"})
     event.remove({ id: "sophisticatedbackpacks:stack_upgrade_omega_tier"})
-
-    event.remove({ output: "sophisticatedstorage:stack_upgrade_tier_5" })
     event.remove({ output: "sophisticatedstorage:stack_upgrade_omega_tier" })
-    event.remove({ output: "sophisticatedbackpacks:stack_upgrade_tier_5" })
 
     // Upgrades
-    brassMachine(event, "sophisticatedstorage:advanced_hopper_upgrade", 2)
+    brassMachine(event, Item.of("sophisticatedstorage:advanced_hopper_upgrade", 2))
 })
