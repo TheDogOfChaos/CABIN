@@ -635,7 +635,7 @@ ServerEvents.recipes(event => {
 
     donutCraft(event, KJ("lead_machine"), KJ("lead_casing"), KJ("logistic_mechanism"))
 
-    leadMachine(event, Item.of("create:package_frogport", 1), MC("slime_ball"))
+    leadMachine(event, Item.of("create:package_frogport", 1), '#forge:slimeballs')
     leadMachine(event, Item.of("create:item_hatch", 4))
     leadMachine(event, Item.of("create:packager", 1), "create:cardboard_block")
     leadMachine(event, Item.of("create:repackager", 1), "create:bound_cardboard_block")
