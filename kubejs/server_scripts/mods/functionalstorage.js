@@ -28,9 +28,8 @@ if(Platform.isLoaded("functionalstorage")) {
             //! ABSOLUTELY CRITIAL: PRESERVE ALL NBT DATA
             // TODO: figure out why this isn't working
             wood_types.forEach((woodType) => {
-                let woodTypeStrippedName = stripNamespace(woodType)
-                if(woodType.includes("minecraft")) {
-                    donutCraft(Item.of(FS(woodTypeName+"_"+i), 1), woodType+"_planks", drawerTypeTags[i])
+                if (woodType.includes("minecraft")) {
+                    donutCraft(Item.of(FS(stripNamespace(woodType)+"_"+i), 1), woodType+"_planks", drawerTypeTags[i])
                     console.log(woodType+" woodtype (minecraft)")
                 } else {
                     // TODO: EveryCompat compat
