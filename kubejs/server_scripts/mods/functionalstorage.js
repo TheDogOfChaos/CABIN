@@ -22,20 +22,19 @@ if(Platform.isLoaded("functionalstorage")) {
         donutCraft(event, FS("framed_simple_compacting_drawer"), FS("simple_compacting_drawer"), "#forge:nuggets/iron")
         
         let drawerTypeTags = ["kubejs:drawer_1x1", "kubejs:drawer_1x2", "kubejs:drawer_2x2"]
-        for (let i=0; i==2; i++) {
+        let stripNamespace = (resourceLocation) => resourceLocation.split(":").shift();
+        for (let i=0; i<2; i++) {
+            console.log(i)
             //! ABSOLUTELY CRITIAL: PRESERVE ALL NBT DATA
-            wood_types.forEach(woodType => {
+            // TODO: figure out why this isn't working
+            wood_types.forEach((woodType) => {
+                let woodTypeStrippedName = stripNamespace(woodType)
                 if(woodType.includes("minecraft")) {
-                    event.shaped(
-                        Item.of(FS(woodType+"_"+i), 1),
-                        ["WWW", "WDW", "WWW"],
-                        {
-                            W: woodType+"_planks",
-                            D: drawerTypeTags[i==2 ? i+2 : i+1]
-                        }
-                    )
+                    donutCraft(Item.of(FS(woodTypeName+"_"+i), 1), woodType+"_planks", drawerTypeTags[i])
+                    console.log(woodType+" woodtype (minecraft)")
                 } else {
                     // TODO: EveryCompat compat
+                    console.log(woodType+" woodtype (other)")
                 }
             })
         }
@@ -47,8 +46,9 @@ if(Platform.isLoaded("functionalstorage")) {
     })
 
     ServerEvents.tags("item", event => {
-        event.add("kubejs:drawer_1x1", /functionalstorage.*_1/)
-        event.add("kubejs:drawer_1x2", /functionalstorage.*_2/)
-        event.add("kubejs:drawer_2x2", /functionalstorage.*_4/)
+        // these do not match framed or fluid drawers
+        event.add("kubejs:drawer_1x1", /^functionalstorage:(?!framed_1$)(?!fluid_1$).+_1$/)
+        event.add("kubejs:drawer_1x2", /^functionalstorage:(?!framed_2$)(?!fluid_2$).+_2$/)
+        event.add("kubejs:drawer_2x2", /^functionalstorage:(?!framed_4$)(?!fluid_4$).+_4$/)
     })
 }
