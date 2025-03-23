@@ -29,7 +29,7 @@ if(Platform.isLoaded("functionalstorage")) {
             // TODO: figure out why this isn't working
             wood_types.forEach((woodType) => {
                 if (woodType.includes("minecraft")) {
-                    donutCraft(Item.of(FS(stripNamespace(woodType)+"_"+i), 1), woodType+"_planks", drawerTypeTags[i])
+                    donutCraft(event, Item.of(FS(stripNamespace(woodType)+"_"+i), 1), woodType+"_planks", drawerTypeTags[i])
                     console.log(woodType+" woodtype (minecraft)")
                 } else {
                     // TODO: EveryCompat compat
