@@ -21,7 +21,8 @@ if(Platform.isLoaded("functionalstorage")) {
         donutCraft(event, FS("framed_controller_extension"), FS("controller_extension"), "#forge:nuggets/iron")
         donutCraft(event, FS("framed_simple_compacting_drawer"), FS("simple_compacting_drawer"), "#forge:nuggets/iron")
         
-        for (let i=1; i==4; i++) {
+        let drawerTypeTags = ["kubejs:drawer_1x1", "kubejs:drawer_1x2", "kubejs:drawer_2x2"]
+        for (let i=0; i==2; i++) {
             //! ABSOLUTELY CRITIAL: PRESERVE ALL NBT DATA
             wood_types.forEach(woodType => {
                 if(woodType.includes("minecraft")) {
@@ -29,7 +30,8 @@ if(Platform.isLoaded("functionalstorage")) {
                         Item.of(FS(woodType+"_"+i), 1),
                         ["WWW", "WDW", "WWW"],
                         {
-                            W: woodType+"_planks"
+                            W: woodType+"_planks",
+                            D: drawerTypeTags[i==2 ? i+2 : i+1]
                         }
                     )
                 } else {
@@ -42,7 +44,11 @@ if(Platform.isLoaded("functionalstorage")) {
     ServerEvents.tags("block", event => {
         event.add("create:wrench_pickup", /functionalstorage/)
         event.add("create:wrench_pickup", /everycomp:fs\//)
+    })
 
-        event.add("kubejs:drawer_1x1", )
+    ServerEvents.tags("item", event => {
+        event.add("kubejs:drawer_1x1", /functionalstorage.*_1/)
+        event.add("kubejs:drawer_1x2", /functionalstorage.*_2/)
+        event.add("kubejs:drawer_2x2", /functionalstorage.*_4/)
     })
 }
