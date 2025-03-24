@@ -24,14 +24,14 @@ if(Platform.isLoaded("functionalstorage")) {
         let drawerTypeTags = ["kubejs:drawer_1x1", "kubejs:drawer_1x2", "kubejs:drawer_2x2"]
         let stripNamespace = (resourceLocation) => resourceLocation.split(":")[1]
         for (let i=0; i<=2; i++) {
-            console.log(i)
             //! ABSOLUTELY CRITIAL: PRESERVE ALL NBT DATA
+            // TODO: Figure out why it's only requiring a single plank in the middle slot (i probably fucked up the inner and outer slot, but i gotta get some sleep, so i'll deal with this shit tomorrow)
             wood_types.forEach((woodType) => {
                 if (woodType.includes("minecraft")) {
                     donutCraft(event, Item.of(FS(stripNamespace(woodType)+"_"+(i==2 ? i+2 : i+1)), 1), woodType+"_planks", drawerTypeTags[i])
                 } else {
                     // TODO: EveryCompat compat
-                    console.log(woodType+" woodtype (other)")
+                    console.log(woodType+" woodtype (handle this later)")
                 }
             })
         }
