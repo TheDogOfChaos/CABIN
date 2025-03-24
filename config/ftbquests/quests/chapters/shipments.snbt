@@ -2351,7 +2351,7 @@
 				type: "item"
 			}]
 			title: "{cabin.quest.433E103CD81712C1.title}"
-			x: 0.5d
+			x: 1.5d
 			y: 23.0d
 		}
 		{
@@ -2375,7 +2375,7 @@
 				type: "item"
 			}]
 			title: "{cabin.quest.29696B4965010CED.title}"
-			x: 1.5d
+			x: 2.5d
 			y: 23.0d
 		}
 		{
@@ -2399,7 +2399,7 @@
 				type: "item"
 			}]
 			title: "{cabin.quest.7C7B81ABFC586379.title}"
-			x: 2.5d
+			x: 3.5d
 			y: 23.0d
 		}
 		{
@@ -2423,8 +2423,8 @@
 				type: "item"
 			}]
 			title: "{cabin.quest.4864E6BA6AE2B49B.title}"
-			x: 3.5d
-			y: 23.0d
+			x: 1.5d
+			y: 25.0d
 		}
 		{
 			can_repeat: true
@@ -2741,12 +2741,12 @@
 		{
 			can_repeat: true
 			disable_toast: true
-			icon: "minecraft:phantom_membrane"
+			icon: "trials:breeze_rod"
 			id: "210A3F8C44AAD89A"
 			rewards: [{
 				auto: "enabled"
 				id: "00ECC786C2F2BD74"
-				item: "kubejs:trade_card_phantom_membrane"
+				item: "kubejs:trade_card_breeze_rod"
 				type: "item"
 			}]
 			shape: "hexagon"
@@ -2759,8 +2759,8 @@
 				type: "item"
 			}]
 			title: "{cabin.quest.210A3F8C44AAD89A.title}"
-			x: 1.5d
-			y: 25.0d
+			x: 0.5d
+			y: 23.0d
 		}
 		{
 			can_repeat: true

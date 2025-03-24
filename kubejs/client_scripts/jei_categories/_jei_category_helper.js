@@ -15,5 +15,7 @@ const Axis = Java.loadClass("com.mojang.math.Axis");
 const BlockStateProperties = Java.loadClass("net.minecraft.world.level.block.state.properties.BlockStateProperties");
 const AnimatedKinetics = Java.loadClass("com.simibubi.create.compat.jei.category.animations.AnimatedKinetics");
 
+const AttachFace = Java.loadClass("net.minecraft.world.level.block.state.properties.AttachFace")
+
 // initialize globals
 if (!global.jeiCategories) global.jeiCategories = {}

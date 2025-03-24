@@ -156,10 +156,10 @@ ServerEvents.recipes(event => {
     event.blasting(KJ("invar_compound"), KJ("nickel_compound"))
     { // Invar ingots
         let s = KJ("invar_compound")
-        event.recipes.createSequencedAssembly([
+        event.recipes.create.sequenced_assembly([
             TE("invar_ingot"),
         ], KJ("invar_compound"), [
-            event.recipes.createPressing(s, s)
+            event.recipes.create.pressing(s, s)
         ]).transitionalItem(s)
             .loops(16)
             .id("kubejs:invar")
@@ -235,20 +235,20 @@ ServerEvents.recipes(event => {
     })
 
     // Plates
-    event.recipes.createPressing([TE("lead_plate")], TE("lead_ingot"))
-    event.recipes.createPressing([TE("constantan_plate")], TE("constantan_ingot"))
-    event.recipes.createPressing([TE("nickel_plate")], TE("nickel_ingot"))
-    event.recipes.createPressing([TE("signalum_plate")], TE("signalum_ingot"))
-    event.recipes.createPressing([TE("lumium_plate")], TE("lumium_ingot"))
-    event.recipes.createPressing([TE("enderium_plate")], TE("enderium_ingot"))
+    event.recipes.create.pressing([TE("lead_plate")], TE("lead_ingot"))
+    event.recipes.create.pressing([TE("constantan_plate")], TE("constantan_ingot"))
+    event.recipes.create.pressing([TE("nickel_plate")], TE("nickel_ingot"))
+    event.recipes.create.pressing([TE("signalum_plate")], TE("signalum_ingot"))
+    event.recipes.create.pressing([TE("lumium_plate")], TE("lumium_ingot"))
+    event.recipes.create.pressing([TE("enderium_plate")], TE("enderium_ingot"))
 
     // dusts
-    event.recipes.createMilling(TE("iron_dust"), F("#ingots/iron"))
-    event.recipes.createMilling(TE("gold_dust"), F("#ingots/gold"))
-    event.recipes.createMilling(TE("nickel_dust"), F("#ingots/nickel"))
-    event.recipes.createMilling(TE("lead_dust"), F("#ingots/lead"))
-    event.recipes.createMilling(TE("copper_dust"), F("#ingots/copper"))
-    event.recipes.createMilling(KJ("zinc_dust"), F("#ingots/zinc"))
+    event.recipes.create.milling(TE("iron_dust"), F("#ingots/iron"))
+    event.recipes.create.milling(TE("gold_dust"), F("#ingots/gold"))
+    event.recipes.create.milling(TE("nickel_dust"), F("#ingots/nickel"))
+    event.recipes.create.milling(TE("lead_dust"), F("#ingots/lead"))
+    event.recipes.create.milling(TE("copper_dust"), F("#ingots/copper"))
+    event.recipes.create.milling(KJ("zinc_dust"), F("#ingots/zinc"))
 
     // other metal unification
     event.replaceOutput({}, "#forge:ingots/silver", TE("silver_ingot"))
@@ -274,7 +274,7 @@ ServerEvents.recipes(event => {
     let dust_process = (materialName, byproduct, ByproductName) => {
         let crushedOre = CR("crushed_" + "raw_" + materialName)
         let oreTag = ("#forge:ores/" + materialName)
-        let oreBlockTag = ("#forge:storage_blocks/raw_" + materialName)
+        let crushedOreBlockTag = ("#forge:storage_blocks/raw_" + materialName)
         let dustTag = ("#forge:dusts/" + materialName)
         let fluid = TC("molten_" + materialName)
         let fluidByproduct = TC("molten_" + ByproductName)
@@ -316,29 +316,29 @@ ServerEvents.recipes(event => {
         event.remove({ id: `thermal:machines/smelter/smelter_${materialName}_ore` })
 
         event.remove([
-            { type: 'minecraft:smelting', input: oreBlockTag },
-            { type: 'minecraft:blasting', input: oreBlockTag },
-            { type: 'create:crushing', input: oreBlockTag },
-            { type: 'occultism:crushing', input: oreBlockTag },
-            { type: 'tconstruct:ore_melting', input: oreBlockTag }
+            { type: 'minecraft:smelting', input: crushedOreBlockTag },
+            { type: 'minecraft:blasting', input: crushedOreBlockTag },
+            { type: 'create:crushing', input: crushedOreBlockTag },
+            { type: 'occultism:crushing', input: crushedOreBlockTag },
+            { type: 'tconstruct:ore_melting', input: crushedOreBlockTag }
         ])
 
         // 'concentrated ore' to crushed ore
-        event.recipes.createMilling([Item.of(crushedOre, 5)], rawOreTag).id("kubejs:ore_processing/milling/raw_ore/" + materialName)
-        event.recipes.createCrushing([Item.of(crushedOre, 5), Item.of(crushedOre, 2).withChance(0.5)], rawOreTag).id("kubejs:ore_processing/crushing/raw_ore/" + materialName)
+        event.recipes.create.milling([Item.of(crushedOre, 5)], rawOreTag).id("kubejs:ore_processing/milling/raw_ore/" + materialName)
+        event.recipes.create.crushing([Item.of(crushedOre, 5), Item.of(crushedOre, 2).withChance(0.5)], rawOreTag).id("kubejs:ore_processing/crushing/raw_ore/" + materialName)
 
         // ore to crushed ore
-        event.recipes.createCrushing([Item.of(crushedOre, 3), Item.of(crushedOre, 1).withChance(0.5), experience, stone], oreTag).id("kubejs:ore_processing/crushing/ore/" + materialName)
+        event.recipes.create.crushing([Item.of(crushedOre, 3), Item.of(crushedOre, 1).withChance(0.5), experience, stone], oreTag).id("kubejs:ore_processing/crushing/ore/" + materialName)
         thermalPulverizer(event, [Item.of(crushedOre).withChance(4.5), Item.of("minecraft:gravel").withChance(0.2)], oreTag, 3000).id("kubejs:ore_processing/pulverizing/ore/" + materialName)
         event.recipes.occultism.crushing(Item.of(dust, 3), Item.of(crushedOre), 200, -1, false).id(`kubejs:occultism/crushing/${materialName}`)
 
         // crushed ore to nuggets
         event.smelting(Item.of(nugget, 3), crushedOre).id("kubejs:ore_processing/smelting/crushed/" + materialName)
-        event.recipes.createSplashing([Item.of(nugget, 2), Item.of(nuggetByproduct, 1).withChance(0.85)], dustTag).id("kubejs:ore_processing/splashing/dust/" + materialName)
+        event.recipes.create.splashing([Item.of(nugget, 2), Item.of(nuggetByproduct, 1).withChance(0.85)], dustTag).id("kubejs:ore_processing/splashing/dust/" + materialName)
 
         // crushed ore to ore dust
-        event.recipes.createMilling([Item.of(dust, 3)], crushedOre).id("kubejs:ore_processing/milling/crushed/" + materialName)
-        event.recipes.createCrushing([Item.of(dust, 3), Item.of(dust, 3).withChance(0.5)], crushedOre).id("kubejs:ore_processing/crushing/crushed/" + materialName)
+        event.recipes.create.milling([Item.of(dust, 3)], crushedOre).id("kubejs:ore_processing/milling/crushed/" + materialName)
+        event.recipes.create.crushing([Item.of(dust, 3), Item.of(dust, 3).withChance(0.5)], crushedOre).id("kubejs:ore_processing/crushing/crushed/" + materialName)
         thermalPulverizer(event, [Item.of(dust, 6)], crushedOre, 15000).id("kubejs:ore_processing/pulverizing/crushed/" + materialName)
 
         // ore dust to nuggets
@@ -346,12 +346,12 @@ ServerEvents.recipes(event => {
 
         // ore dust to fluid
         thermalCrucible(event, Fluid.of(fluid, 30), dustTag, 3000).id("kubejs:ore_processing/crucible/dust/" + materialName)
-        event.recipes.createMixing([Fluid.of(fluid, 180)], [Item.of(dustTag, 3), AE2("matter_ball")]).superheated().id("kubejs:ore_processing/mixing/dust/" + materialName)
+        event.recipes.create.mixing([Fluid.of(fluid, 180)], [Item.of(dustTag, 3), AE2("matter_ball")]).superheated().id("kubejs:ore_processing/mixing/dust/" + materialName)
 
         // ingots to fluid
         // thermalCrucible(event, Fluid.of(fluid, 90), ingot, 2000).id('kubejs:ore_processing/crucible/ingot/'+materialName) //now automatically ported
-
-        // melting crushed ores to fluid
+        
+        // melting crushed ores to nuggets
         event.custom({
             "type": "thermal:smelter",
             "ingredient": { "item": crushedOre },
@@ -363,7 +363,7 @@ ServerEvents.recipes(event => {
             "experience": 0.2,
             "energy": 20000
         }).id("kubejs:ore_processing/induction_smelting/crushed/" + materialName)
-
+        
         // melting ore dusts to fluid
         event.custom({
             "type": "tconstruct:melting",

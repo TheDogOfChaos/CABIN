@@ -28,7 +28,7 @@ ServerEvents.recipes(event => {
             // Some mods name their wood slabs 'planks slab' for some reason
             slab = wood + "_planks_slab"
         }
-        event.recipes.createCutting(Item.of(slab, 2), planks).processingTime(150)
+        event.recipes.create.cutting(Item.of(slab, 2), planks).processingTime(150)
     }
     wood_types.forEach(plankCutting)
 
@@ -52,7 +52,7 @@ ServerEvents.recipes(event => {
         A: "minecraft:clay_ball",
         S: ["minecraft:kelp", "minecraft:seagrass"]
     })
-    event.recipes.createMixing(Item.of(AP("algal_blend"), 2), ["minecraft:clay_ball", ["minecraft:kelp", "minecraft:seagrass"]])
+    event.recipes.create.mixing(Item.of(AP("algal_blend"), 2), ["minecraft:clay_ball", ["minecraft:kelp", "minecraft:seagrass"]])
     // algal brick
     event.remove({ output: AP("algal_brick") })
     event.smelting(AP("algal_brick"), AP("algal_blend")).xp(0).cookingTime(120)
@@ -80,15 +80,15 @@ ServerEvents.recipes(event => {
         A: "minecraft:andesite",
         S: AP("algal_brick")
     })
-    event.recipes.createMixing(Item.of(CR("andesite_alloy"), 2), [AP("algal_brick"), "minecraft:andesite"])
+    event.recipes.create.mixing(Item.of(CR("andesite_alloy"), 2), [AP("algal_brick"), "minecraft:andesite"])
     // kinetic assembly
     transitional = "kubejs:incomplete_kinetic_mechanism"
-    event.recipes.createSequencedAssembly([
+    event.recipes.create.sequenced_assembly([
         "kubejs:kinetic_mechanism",
     ], "#minecraft:wooden_slabs", [
-        event.recipes.createDeploying(transitional, [transitional, CR("andesite_alloy")]),
-        event.recipes.createDeploying(transitional, [transitional, CR("andesite_alloy")]),
-        event.recipes.createDeploying(transitional, [transitional, KJ("#saws")])
+        event.recipes.create.deploying(transitional, [transitional, CR("andesite_alloy")]),
+        event.recipes.create.deploying(transitional, [transitional, CR("andesite_alloy")]),
+        event.recipes.create.deploying(transitional, [transitional, KJ("#saws")])
     ]).transitionalItem(transitional)
         .loops(1)
         .id("kubejs:kinetic_mechanism")
@@ -202,12 +202,12 @@ ServerEvents.recipes(event => {
 
     // Sealed mechanism assembly
     transitional = KJ("incomplete_sealed_mechanism")
-    event.recipes.createSequencedAssembly([
+    event.recipes.create.sequenced_assembly([
         KJ("sealed_mechanism"),
     ], KJ("kinetic_mechanism"), [
-        event.recipes.createDeploying(transitional, [transitional, TE("cured_rubber")]),
-        event.recipes.createDeploying(transitional, [transitional, TE("cured_rubber")]),
-        event.recipes.createDeploying(transitional, [transitional, F("#slimeballs")])// .keepHeldItem(true)
+        event.recipes.create.deploying(transitional, [transitional, TE("cured_rubber")]),
+        event.recipes.create.deploying(transitional, [transitional, TE("cured_rubber")]),
+        event.recipes.create.deploying(transitional, [transitional, F("#slimeballs")])// .keepHeldItem(true)
     ]).transitionalItem(transitional)
         .loops(1)
         .id("kubejs:sealed_mechanism")
@@ -365,16 +365,16 @@ ServerEvents.recipes(event => {
 
     // Infinite Sky Stone
 
-    event.recipes.createMilling([AE2("sky_dust"), AE2("sky_stone_block")], AE2("sky_stone_block")).processingTime(1000)
+    event.recipes.create.milling([AE2("sky_dust"), AE2("sky_stone_block")], AE2("sky_stone_block")).processingTime(1000)
 
     // Infinite Certus Quartz
     event.shapeless("2x kubejs:certus_crystal_seed", [AE2("certus_quartz_dust"), MC("#sand")])
     event.remove({ id: AE2("transform/certus_quartz_crystals") })
-    event.recipes.createMilling([AE2("certus_quartz_dust")], AE2("#all_certus_quartz")).processingTime(200)
-    event.recipes.createMilling([TE("quartz_dust")], MC("quartz")).processingTime(200)
+    event.recipes.create.milling([AE2("certus_quartz_dust")], AE2("#all_certus_quartz")).processingTime(200)
+    event.recipes.create.milling([TE("quartz_dust")], MC("quartz")).processingTime(200)
 
-    event.recipes.createMechanicalCrafting(Item.of(KJ("certus_crystal_seed"), 2), ["A"], { A: AE2("certus_quartz_crystal") })
-    event.recipes.createMechanicalCrafting(Item.of(KJ("fluix_crystal_seed"), 2), ["A"], { A: AE2("fluix_crystal") })
+    event.recipes.create.mechanical_crafting(Item.of(KJ("certus_crystal_seed"), 2), ["A"], { A: AE2("certus_quartz_crystal") })
+    event.recipes.create.mechanical_crafting(Item.of(KJ("fluix_crystal_seed"), 2), ["A"], { A: AE2("fluix_crystal") })
 
     let grow = (from, via, to) => {
         event.custom({
@@ -453,12 +453,12 @@ ServerEvents.recipes(event => {
     // Precision mechanisms
     event.remove({ id: CR("sequenced_assembly/precision_mechanism") })
     transitional = CR("incomplete_precision_mechanism")
-    event.recipes.createSequencedAssembly([
+    event.recipes.create.sequenced_assembly([
         CR("precision_mechanism"),
     ], KJ("kinetic_mechanism"), [
-        event.recipes.createDeploying(transitional, [transitional, CR("electron_tube")]),
-        event.recipes.createDeploying(transitional, [transitional, CR("electron_tube")]),
-        event.recipes.createDeploying(transitional, [transitional, KJ("#screwdrivers")])
+        event.recipes.create.deploying(transitional, [transitional, CR("electron_tube")]),
+        event.recipes.create.deploying(transitional, [transitional, CR("electron_tube")]),
+        event.recipes.create.deploying(transitional, [transitional, KJ("#screwdrivers")])
     ]).transitionalItem(transitional)
         .loops(1)
         .id("kubejs:precision_mechanism")
@@ -486,11 +486,11 @@ ServerEvents.recipes(event => {
 
     // - - - - - Chapter 2A - - - - -
     // Vine Transmutation
-    donutCraft(event, MC("weeping_vines"), "ae2:fluix_crystal", MC("twisting_vines"))
-    donutCraft(event, MC("twisting_vines"), "ae2:fluix_crystal", MC("weeping_vines"))
+    donutCraft(event, MC("weeping_vines"), 'occultism:spirit_attuned_gem', MC("twisting_vines"))
+    donutCraft(event, MC("twisting_vines"), 'occultism:spirit_attuned_gem', MC("weeping_vines"))
     // Liquid soul sand
     event.remove({ id: TC("smeltery/melting/soul/sand") })
-    event.recipes.createMixing(Fluid.of(TC("liquid_soul"), 500), [MC("twisting_vines"), MC("weeping_vines")]).heated()
+    event.recipes.create.mixing(Fluid.of(TC("liquid_soul"), 500), [MC("twisting_vines"), MC("weeping_vines")]).heated()
 
     // Infernal Mechanisms
     event.custom({
@@ -650,9 +650,9 @@ ServerEvents.recipes(event => {
     let fern1 = KJ("ender_slimy_fern_leaf")
     let fern2 = KJ("sky_slimy_fern_leaf")
     let fern3 = KJ("earth_slimy_fern_leaf")
-    event.shapeless(fern1, ["ae2:fluix_crystal", fern2, fern2, fern2, fern2, fern3, fern3, fern3, fern3])
-    event.shapeless(fern2, ["ae2:fluix_crystal", fern3, fern3, fern3, fern3, fern1, fern1, fern1, fern1])
-    event.shapeless(fern3, ["ae2:fluix_crystal", fern2, fern2, fern2, fern2, fern1, fern1, fern1, fern1])
+    event.shapeless(fern1, ['occultism:spirit_attuned_gem', fern2, fern2, fern2, fern2, fern3, fern3, fern3, fern3])
+    event.shapeless(fern2, ['occultism:spirit_attuned_gem', fern3, fern3, fern3, fern3, fern1, fern1, fern1, fern1])
+    event.shapeless(fern3, ['occultism:spirit_attuned_gem', fern2, fern2, fern2, fern2, fern1, fern1, fern1, fern1])
     // Fern Cutting
     let chop = (type, output) => {
         event.custom({
@@ -667,7 +667,7 @@ ServerEvents.recipes(event => {
             "ingredient": { "item": KJ(type + "_slimy_fern_leaf") },
             "result": { "item": TC(type + "_slime_fern") }
         })
-        event.recipes.createMilling([KJ(type + "_slime_fern_paste")], KJ(type + "_slimy_fern_leaf"))
+        event.recipes.create.milling([KJ(type + "_slime_fern_paste")], KJ(type + "_slimy_fern_leaf"))
         event.campfireCooking(output, KJ(type + "_slime_fern_paste")).cookingTime(300)
     }
     chop("earth", MC("gunpowder"))
@@ -675,7 +675,7 @@ ServerEvents.recipes(event => {
     chop("ender", AE2("ender_dust"))
     // Crushing Wheel Recipe... Does this belong with chapter 2?
     event.remove({ id: CR("mechanical_crafting/crushing_wheel") })
-    event.recipes.createMechanicalCrafting(Item.of(CR("crushing_wheel"), 2), [
+    event.recipes.create.mechanical_crafting(Item.of(CR("crushing_wheel"), 2), [
         " AAA ",
         "AABAA",
         "ABBBA",
@@ -686,15 +686,15 @@ ServerEvents.recipes(event => {
         B: MC("stick")
     })
     // Singularties
-    event.recipes.createCrushing([Item.of(AE2("singularity")).withChance(1)], CR("crushing_wheel")).processingTime(250)
+    event.recipes.create.crushing([Item.of(AE2("singularity")).withChance(1)], CR("crushing_wheel")).processingTime(250)
     // Quantum Entangled Singularties are from ae2
     // Dye Entangled Singularties
     let dyes = [MC("orange_dye"), MC("magenta_dye"), MC("light_blue_dye"), MC("yellow_dye"), MC("lime_dye"), MC("pink_dye"), MC("cyan_dye"), MC("purple_dye"), MC("blue_dye"), MC("brown_dye"), MC("green_dye"), MC("red_dye")]
-    event.recipes.createCompacting("1x " + KJ("dye_entangled_singularity"), [dyes, Item.of(AE2("quantum_entangled_singularity"), 1)])
+    event.recipes.create.compacting("1x " + KJ("dye_entangled_singularity"), [dyes, Item.of(AE2("quantum_entangled_singularity"), 1)])
     // The mysterious conversion jei entry for entangled singularities has been moved moved to client scripts
     // Paint Balls
     event.remove({ id: /ae2:tools\/paintballs.*/ })
-    event.recipes.createCrushing([
+    event.recipes.create.crushing([
         Item.of(AE2("red_paint_ball"), 1).withChance(.90),
         Item.of(AE2("yellow_paint_ball"), 1).withChance(.80),
         Item.of(AE2("green_paint_ball"), 1).withChance(.70),
@@ -707,10 +707,10 @@ ServerEvents.recipes(event => {
         let element = colors[index];
         if (index == colors.length - 1)
             continue;
-        event.recipes.createEmptying([AE2(colors[index + 1] + "_paint_ball"), Fluid.of(KJ("chromatic_waste"), 250)], AE2(element + "_paint_ball"))
+        event.recipes.create.emptying([AE2(colors[index + 1] + "_paint_ball"), Fluid.of(KJ("chromatic_waste"), 250)], AE2(element + "_paint_ball"))
     }
     // Chromatic Compound
-    event.recipes.createMechanicalCrafting(CR("chromatic_compound"), [
+    event.recipes.create.mechanical_crafting(CR("chromatic_compound"), [
         "AA",
         "AA"
     ], {
@@ -719,8 +719,8 @@ ServerEvents.recipes(event => {
     // Easy Torch Recipe for those who can't afford beacons
     event.campfireCooking(MC("torch"), MC("stick")).cookingTime(20)
     // Radiant Coils
-    event.recipes.createPressing(KJ("radiant_sheet"), CR("refined_radiance"))
-    event.recipes.createMechanicalCrafting(KJ("radiant_coil"), ["A"], { A: KJ("radiant_sheet") })
+    event.recipes.create.pressing(KJ("radiant_sheet"), CR("refined_radiance"))
+    event.recipes.create.mechanical_crafting(KJ("radiant_coil"), ["A"], { A: KJ("radiant_sheet") })
     // Chromatic Resonator
     event.shaped(KJ("chromatic_resonator"), [
         " R ",
@@ -733,12 +733,12 @@ ServerEvents.recipes(event => {
     })
     // Inductive Mechanisms
     transitional = KJ("incomplete_inductive_mechanism")
-    event.recipes.createSequencedAssembly([
+    event.recipes.create.sequenced_assembly([
         KJ("inductive_mechanism"),
     ], CR("precision_mechanism"), [
-        event.recipes.createDeploying(transitional, [transitional, KJ("radiant_coil")]),
-        event.recipes.createDeploying(transitional, [transitional, KJ("radiant_coil")]),
-        event.recipes.createDeploying(transitional, [transitional, KJ("#chromatic_resonators")])
+        event.recipes.create.deploying(transitional, [transitional, KJ("radiant_coil")]),
+        event.recipes.create.deploying(transitional, [transitional, KJ("radiant_coil")]),
+        event.recipes.create.deploying(transitional, [transitional, KJ("#chromatic_resonators")])
     ]).transitionalItem(transitional)
         .loops(1)
         .id("kubejs:inductive_mechanism")
@@ -750,7 +750,7 @@ ServerEvents.recipes(event => {
     invarMachine(event, Item.of(TE("dynamo_compression"), 1), TE("rf_coil"))
     invarMachine(event, Item.of("kubejs:pipe_module_tier_2", 4))
     // Disenchantment Upgrade
-    createMachine(TE("dynamo_compression"), event, Item.of(TE("dynamo_disenchantment"), 1), "ae2:fluix_crystal")
+    createMachine(TE("dynamo_compression"), event, Item.of(TE("dynamo_disenchantment"), 1), 'occultism:spirit_attuned_gem')
     // Default thermal machine recipes are kept in.
     // Check older versions of the script to see commented out code for thermal machine crafting recipes
 
@@ -783,7 +783,7 @@ ServerEvents.recipes(event => {
     // Abstruse Mechanisms
     thermalSmelter(event, KJ("abstruse_mechanism"), [KJ("inductive_mechanism"), TE("enderium_ingot")], 2000)
     // Ender Slime Ball?
-    event.recipes.createMixing(["tconstruct:ender_slime_ball"], ["minecraft:chorus_fruit", "#forge:slimeballs"])
+    event.recipes.create.mixing(["tconstruct:ender_slime_ball"], ["minecraft:chorus_fruit", "#forge:slimeballs"])
     // Enderium Machines
     donutCraft(event, KJ("enderium_machine"), KJ("enderium_casing"), KJ("abstruse_mechanism"))
     // Machine Crafting
@@ -838,12 +838,12 @@ ServerEvents.recipes(event => {
         "transitionalItem": { "item": KJ("incomplete_coke_chunk") }
     }).id("kubejs:coke_cutting")
     // Sand Ball
-    event.recipes.createSplashing([
+    event.recipes.create.splashing([
         Item.of(KJ("sand_ball")).withChance(0.125)
     ], "minecraft:sandstone")
     thermalBottler(event, KJ("sand_ball"), [Fluid.of(MC("water"), 50), F("#sand/colorless")], 1000)
     // Sand Chunks
-    event.recipes.createEmptying([KJ("rough_sand"), Fluid.of(KJ("fine_sand"), 500)], KJ("sand_ball"))
+    event.recipes.create.emptying([KJ("rough_sand"), Fluid.of(KJ("fine_sand"), 500)], KJ("sand_ball"))
     // Basalz Powder
     event.remove({ output: TE("basalz_powder") })
     event.custom({
@@ -878,13 +878,13 @@ ServerEvents.recipes(event => {
     })
     let blizz = TE("blizz_powder"); let basalz = TE("basalz_powder")
     // Crushing powder recipes
-    event.recipes.createCrushing([Item.of(blizz, 1), Item.of(blizz, 1).withChance(.5)], TE("blizz_rod"))
-    event.recipes.createCrushing([Item.of(basalz, 1), Item.of(basalz, 1).withChance(.5)], TE("basalz_rod"))
+    event.recipes.create.crushing([Item.of(blizz, 1), Item.of(blizz, 1).withChance(.5)], TE("blizz_rod"))
+    event.recipes.create.crushing([Item.of(basalz, 1), Item.of(basalz, 1).withChance(.5)], TE("basalz_rod"))
     // Ice and Earth Charges
     event.remove({ id: TE("ice_charge_3") })
     event.remove({ id: TE("earth_charge_3") })
-    event.recipes.createCompacting(TE("ice_charge"), [blizz, blizz, blizz, blizz, blizz, blizz, blizz, blizz])
-    event.recipes.createCompacting(TE("earth_charge"), [basalz, basalz, basalz, basalz, basalz, basalz, basalz, basalz])
+    event.recipes.create.compacting(TE("ice_charge"), [blizz, blizz, blizz, blizz, blizz, blizz, blizz, blizz])
+    event.recipes.create.compacting(TE("earth_charge"), [basalz, basalz, basalz, basalz, basalz, basalz, basalz, basalz])
     // Purified Sand
     thermalSmelter(event,
         [KJ("purified_sand")],
@@ -1021,12 +1021,12 @@ ServerEvents.recipes(event => {
     })
     // Calculation Mechanisms
     transitional = KJ("incomplete_calculation_mechanism")
-    event.recipes.createSequencedAssembly([
+    event.recipes.create.sequenced_assembly([
         KJ("calculation_mechanism"),
     ], KJ("inductive_mechanism"), [
-        event.recipes.createDeploying(transitional, [transitional, AE2("printed_silicon")]),
-        event.recipes.createDeploying(transitional, [transitional, AE2("printed_silicon")]),
-        event.recipes.createDeploying(transitional, [transitional, KJ("#flash_drives")])
+        event.recipes.create.deploying(transitional, [transitional, AE2("printed_silicon")]),
+        event.recipes.create.deploying(transitional, [transitional, AE2("printed_silicon")]),
+        event.recipes.create.deploying(transitional, [transitional, KJ("#flash_drives")])
     ]).transitionalItem(transitional)
         .loops(1)
         .id("kubejs:calculation_mechanism")
@@ -1219,21 +1219,10 @@ ServerEvents.recipes(event => {
         "cooling_time": 20
     })
 
-    //	Remove all the recipes we don't want from Ad Astra
-    //	We're in an awkward situation where we want half of the recipes and don't want the other half
-    let begoneEarth = [
-        "nasa_workbenching/tier1", "nasa_workbenching/tier2", "nasa_workbenching/tier3", "nasa_workbenching/tier4", "rover",
-        "oxygen_mask", "space_suit", "space_leggings", "space_boots",
-        "hammer", "iron_stick", "oxygen_gear", "oxygen_tank", "wheel", "engine_frame", "engine_fan", "rocket_nose_cone",
-        "iron_engine", "gold_engine", "diamond_engine", "calorite_engine",
-        "iron_tank", "gold_tank", "diamond_tank", "calorite_tank",
-        "rocket_fin", "iron_plate", "desh_plate",
-        "rocket_launch_pad", "nasa_workbench",
-        "solar_panel", "coal_generator", "compressor", "fuel_refinery", "oxygen_loader", "oxygen_distributer", "water_pump"
-    ]
-    begoneEarth.forEach(begone => { event.remove({ output: AA(begone) }) })
+    //Ad Astra Recipe Removals are found in ad_astra.js
+
     // Matter Plastics
-    event.recipes.createCompacting(KJ("matter_plastics"), [AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball")]).superheated()
+    event.recipes.create.compacting(KJ("matter_plastics"), [AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball"), AE2("matter_ball")]).superheated()
     // Saves a lot of code to reuse an object with the materials here
     let materials = {
         A: KJ("matter_plastics"),
@@ -1242,7 +1231,7 @@ ServerEvents.recipes(event => {
         S: KJ("computation_matrix")
     }
     // Navigation Computer
-    event.recipes.createMechanicalCrafting("kubejs:navigation_computer", [
+    event.recipes.create.mechanical_crafting("kubejs:navigation_computer", [
         "AAAAA",
         "ASSSA",
         "GS SG",
@@ -1251,21 +1240,27 @@ ServerEvents.recipes(event => {
     ], materials)
     // Oxygen Loader
     materials.S = MC("bucket")
-    event.recipes.createMechanicalCrafting("ad_astra:oxygen_loader", [
+    event.recipes.create.mechanical_crafting("ad_astra:oxygen_loader", [
         "AAA",
         "GSG",
         "AMA"
     ], materials)
     // Oxygen Bubble Distributor
     materials.S = CR("propeller")
-    event.recipes.createMechanicalCrafting("ad_astra:oxygen_distributor", [
+    event.recipes.create.mechanical_crafting("ad_astra:oxygen_distributor", [
         "AAA",
         "GSG",
         "AMA"
     ], materials)
+    // Oxygen Sensor
+        event.recipes.create.mechanical_crafting("ad_astra:oxygen_sensor", [
+            "AAA",
+            "GSG",
+            "AMA"
+        ], Object.assign(materials, {M:"minecraft:redstone_block"}))
     // Lander Deployer
     materials.S = CR("empty_schematic")
-    event.recipes.createMechanicalCrafting("kubejs:lander_deployer", [
+    event.recipes.create.mechanical_crafting("kubejs:lander_deployer", [
         "AAA",
         "GSG",
         "AMA"
@@ -1284,19 +1279,46 @@ ServerEvents.recipes(event => {
         S: MC("iron_chestplate")
     }
     // chestplate
-    event.recipes.createMechanicalCrafting("ad_astra:space_suit", pattern, materials)
+    event.recipes.create.mechanical_crafting("ad_astra:space_suit", pattern, materials)
     // helmet
     materials.S = MC("iron_helmet")
-    event.recipes.createMechanicalCrafting("ad_astra:space_helmet", pattern, materials)
+    event.recipes.create.mechanical_crafting("ad_astra:space_helmet", pattern, materials)
     // leggings
     materials.S = MC("iron_leggings")
-    event.recipes.createMechanicalCrafting("ad_astra:space_pants", pattern, materials)
+    event.recipes.create.mechanical_crafting("ad_astra:space_pants", pattern, materials)
     // boots
     materials.S = MC("iron_boots")
-    event.recipes.createMechanicalCrafting("ad_astra:space_boots", pattern, materials)
+    event.recipes.create.mechanical_crafting("ad_astra:space_boots", pattern, materials)
+
+    //Gas Tanks
+    materials = {
+        A: KJ("matter_plastics"),
+        G: F("#plates/gold")
+    }
+    event.recipes.create.mechanical_crafting("ad_astra:gas_tank", [
+        "G",
+        "A",
+        "A"
+    ], materials)
+    materials.A = "#forge:ingots/invar"
+    materials.T = "ad_astra:gas_tank"
+    event.recipes.create.mechanical_crafting("ad_astra:large_gas_tank", [
+        " G ",
+        "ATA",
+        "ATA"
+    ], materials)
+
+    //Zip Gun
+    materials.T = "ad_astra:large_gas_tank"
+    event.recipes.create.mechanical_crafting("ad_astra:zip_gun", [
+        "AAG",
+        "T  "
+    ], materials)
+
+
 
     // Rocket Launch Pad
-    createMachine(AP("heavy_stone_bricks"), event, Item.of("ad_astra:launch_pad"), KJ("matter_plastics"))
+    event.recipes.create.deploying(Item.of("ad_astra:launch_pad"), [AP("heavy_stone_bricks"), KJ("matter_plastics")])
 
     //	oil refining
     event.custom({
@@ -1333,7 +1355,7 @@ ServerEvents.recipes(event => {
     })
 
     // The Rocket
-    event.recipes.createMechanicalCrafting("ad_astra:tier_1_rocket", [
+    event.recipes.create.mechanical_crafting("ad_astra:tier_1_rocket", [
         "    I    ",
         "   IPI   ",
         "   IGI   ",
@@ -1351,4 +1373,29 @@ ServerEvents.recipes(event => {
         L: "kubejs:lander_deployer",
         C: "thermal:dynamo_compression"
     })
+
+    //Solar Panel
+    event.recipes.create.mechanical_crafting("ad_astra:solar_panel", [
+        "CCC",
+        "DMD",
+        "DDD"
+    ], {
+        C: "ad_astra:photovoltaic_etrium_cell",
+        M: "ae2:controller",
+        D: "#forge:plates/desh"
+    })
+
+    //Gravity Normalizer
+    transitional = "kubejs:incomplete_gravity_normalizer"
+    event.recipes.create.sequenced_assembly([
+        "ad_astra:gravity_normalizer",
+    ], "kubejs:computation_matrix", [
+        event.recipes.create.deploying(transitional, [transitional, "kubejs:enderium_machine"]),
+        event.recipes.create.deploying(transitional, [transitional, "thermal:flux_capacitor"]),
+        event.recipes.create.deploying(transitional, [transitional, "#forge:plates/desh"]),
+        event.recipes.create.deploying(transitional, [transitional, "#forge:plates/desh"]),
+        event.recipes.create.deploying(transitional, [transitional, "#forge:plates/desh"])
+    ]).transitionalItem(transitional)
+        .loops(1)
+        .id("kubejs:gravity_normalizer")
 })

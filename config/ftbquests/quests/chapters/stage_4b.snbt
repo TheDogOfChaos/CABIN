@@ -313,7 +313,7 @@
 			tasks: [{
 				consume_items: false
 				id: "10EF9D8072B539A4"
-				item: "kubejs:substrate_arcane"
+				item: "kubejs:substrate_fluix"
 				type: "item"
 			}]
 			x: 2.5d

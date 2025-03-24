@@ -51,9 +51,9 @@ if(Platform.isLoaded("biomesoplenty")) {
 		}).id('kubejs:devices/tree_extractor/tree_extractor_magic')*/
 
         // Wash sand into clay
-        event.recipes.createSplashing([Item.of(MC("clay_ball"), 1).withChance(0.25)], "biomesoplenty:black_sand")
-        event.recipes.createSplashing([Item.of(MC("clay_ball"), 1).withChance(0.25)], "biomesoplenty:white_sand")
-        event.recipes.createSplashing([Item.of(MC("clay_ball"), 1).withChance(0.25)], "biomesoplenty:orange_sand")
+        event.recipes.create.splashing([Item.of(MC("clay_ball"), 1).withChance(0.25)], "biomesoplenty:black_sand")
+        event.recipes.create.splashing([Item.of(MC("clay_ball"), 1).withChance(0.25)], "biomesoplenty:white_sand")
+        event.recipes.create.splashing([Item.of(MC("clay_ball"), 1).withChance(0.25)], "biomesoplenty:orange_sand")
         // Flesh igeneous extruder recipe.
         event.custom({
             "type": "thermal:rock_gen",

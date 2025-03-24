@@ -1,38 +1,38 @@
 ServerEvents.recipes(event => {
-    // phantom membrane alternatives
-    if(Platform.isLoaded("railways")) {
-        event.recipes.createFilling("railways:track_phantom", [CR("track"), Fluid.of(CR("potion"), 50, '{Potion:"minecraft:invisibility"}')])
-        event.recipes.createFilling("railways:track_phantom", [CR("track"), Fluid.of(CR("potion"), 50, '{Potion:"minecraft:long_invisibility"}')])
-        event.recipes.createFilling("railways:track_phantom", [CR("track"), Fluid.of("cofh_core:potion", 50, '{Potion:"minecraft:invisibility"}')])
-        event.recipes.createFilling("railways:track_phantom", [CR("track"), Fluid.of("cofh_core:potion", 50, '{Potion:"minecraft:long_invisibility"}')])
+    // phantom membrane replacements
+    if (Platform.isLoaded("railways")) {
+        event.recipes.create.filling("railways:track_phantom", [CR("track"), Fluid.of(CR("potion"), 50, '{Potion:"minecraft:invisibility"}')])
+        event.recipes.create.filling("railways:track_phantom", [CR("track"), Fluid.of(CR("potion"), 50, '{Potion:"minecraft:long_invisibility"}')])
+        event.recipes.create.filling("railways:track_phantom", [CR("track"), Fluid.of("cofh_core:potion", 50, '{Potion:"minecraft:invisibility"}')])
+        event.recipes.create.filling("railways:track_phantom", [CR("track"), Fluid.of("cofh_core:potion", 50, '{Potion:"minecraft:long_invisibility"}')])
     }
 
-    if(Platform.isLoaded("moreminecarts")) {
-        event.shapeless("moreminecarts:levitation_powder", TE("blitz_powder"))
-        event.recipes.createCrushing([Item.of("moreminecarts:levitation_powder"), Item.of("moreminecarts:levitation_powder", 1).withChance(.5)], TE("blitz_powder"))
-    }
-})
-
-// alternate double jump recipe
-ServerEvents.highPriorityData( event => {
-    event.addJson("kubejs:recipes/tools/modifiers/ability/double_jump", {
+    if (Platform.isLoaded("moreminecarts")) {
+        event.replaceInput({}, 'minecraft:phantom_membrane', TE("blitz_powder"))
+        event.recipes.create.crushing([Item.of("moreminecarts:levitation_powder"), Item.of("moreminecarts:levitation_powder", 1).withChance(.5)], TE("blitz_powder"))
+    }    
+    // alternate double jump recipe
+    event.custom({
         "type": "tconstruct:modifier",
         "inputs": [
             { "item": "minecraft:piston" },
             { "item": "tconstruct:sky_slime" },
             { "item": "minecraft:piston" },
-            { "item": "tconstruct:sky_slime_bottle" },
-            { "item": "tconstruct:sky_slime_bottle" }
+            { "item": "trials:wind_charge" },
+            { "item": "trials:wind_charge" }
         ],
-        "tools": { "tag": "tconstruct:modifiable/armor/boots" },
-        "slots": { "abilities": 1 },
-        "allow_crystal": true,
-        "result": { "name": "tconstruct:double_jump", "level": 1 }
-    })
+        "result": "tconstruct:double_jump",
+        "slots": {
+            "abilities": 1
+        },
+        "tools": {
+            "tag": "tconstruct:modifiable/armor/boots"
+        }
+    }).id("tconstruct:tools/modifiers/ability/double_jump")
+    // slow fall potion is in startup script potions.js
 })
-// slow fall potion is in startup script potions.js
 
-ServerEvents.loaded(event=>{
+ServerEvents.loaded(event => {
     if (!event.server.persistentData.insomniaDisabled) {
         event.server.runCommandSilent("/gamerule doInsomnia false")
         event.server.persistentData.insomniaDisabled = true;

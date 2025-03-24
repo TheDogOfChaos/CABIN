@@ -17,6 +17,29 @@
         ]
       },
       {
+        "rolls": 1,
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "tconstruct:add_tool_data",
+                "materials": [
+                  {
+                    "type": "tconstruct:random"
+                  },
+                  {
+                    "type": "tconstruct:random"
+                  }
+                ]
+              }
+            ],
+            "name": "tconstruct:melting_pan",
+            "weight": 1
+          }
+        ]
+      },
+      {
         "rolls": {
           "min": 2.0,
           "max": 4.0,

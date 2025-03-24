@@ -2,21 +2,21 @@ ServerEvents.recipes(event => {
     let stone = Item.of(MC("cobblestone"), 1).withChance(.5)
     let experience = Item.of(CR("experience_nugget"), 1).withChance(0.75)
 
-    event.recipes.createCrushing([Item.of(TE("sapphire"), 2), Item.of(TE("sapphire"), 1).withChance(.25), experience,stone], TE("sapphire_ore"))
-    event.recipes.createCrushing([Item.of(TE("ruby"), 2), Item.of(TE("ruby"), 1).withChance(.25), experience,stone], TE("ruby_ore"))
+    event.recipes.create.crushing([Item.of(TE("sapphire"), 2), Item.of(TE("sapphire"), 1).withChance(.25), experience,stone], TE("sapphire_ore"))
+    event.recipes.create.crushing([Item.of(TE("ruby"), 2), Item.of(TE("ruby"), 1).withChance(.25), experience,stone], TE("ruby_ore"))
 
-    event.recipes.createMilling(["4x " + MC("redstone")], TE("cinnabar")).processingTime(700)
-    event.recipes.createCrushing(["6x " + MC("redstone")], TE("cinnabar")).processingTime(500)
+    event.recipes.create.milling(Item.of("minecraft:redstone", 4), TE("cinnabar")).processingTime(700)
+    event.recipes.create.crushing(Item.of("minecraft:redstone", 6), TE("cinnabar")).processingTime(500)
     event.remove({ id: TE("machines/pulverizer/pulverizer_cinnabar") })
-    thermalPulverizer(event, ["8x " + MC("redstone")], TE("cinnabar"), 10000)
+    thermalPulverizer(event, Item.of("minecraft:redstone", 8), TE("cinnabar"), 10000)
 
-    event.recipes.createMilling([TE("sulfur_dust")], F("#gems/sulfur")).processingTime(500)
-    event.recipes.createMilling([TE("niter_dust")], F("#gems/niter")).processingTime(500)
-    event.recipes.createMilling([TE("apatite_dust")], F("#gems/apatite")).processingTime(500)
+    event.recipes.create.milling(TE("sulfur_dust"), F("#gems/sulfur")).processingTime(500)
+    event.recipes.create.milling(TE("niter_dust"), F("#gems/niter")).processingTime(500)
+    event.recipes.create.milling(TE("apatite_dust"), F("#gems/apatite")).processingTime(500)
 
     // recompacting gem dusts into their gem form
     let recompact = (id, id2) => {
-        event.recipes.createCompacting(id2, [id])
+        event.recipes.create.compacting(id2, [id])
     }
     recompact(F("#dusts/obsidian"), MC("obsidian"))
     recompact(F("#dusts/diamond"), MC("diamond"))

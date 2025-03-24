@@ -64,7 +64,6 @@ ItemEvents.tooltip(tooltip => {
             text.add(3, Text.translatable("item.kubejs.machine.transformation"));
         }
     });
-
     tooltip.addAdvanced(["/^kubejs:trial.+$/"], (item, adv, text) => {
         if (!tooltip.shift) {
             text.add(1, Text.translatable("item.kubejs.shift.summary"));
@@ -72,6 +71,16 @@ ItemEvents.tooltip(tooltip => {
             text.add(1, Text.translatable("item.kubejs.shift.summary"));
             text.add(2, Text.translatable("item.kubejs.trial.details"));
             text.add(3, Text.translatable("item.kubejs.trial.special_info"));
+        }
+    });
+
+    tooltip.addAdvanced(["occultism:spirit_fire"], (item, adv, text) => {
+        if (!tooltip.shift) {
+            text.add(1, Text.translatable("item.kubejs.shift.summary"));
+        } else {
+            text.add(1, Text.translatable("item.kubejs.shift.summary"));
+            text.add(2, Text.translatable("item.spirit_fire.info"));
+            text.add(3, Text.translatable("item.spirit_fire.creation"));
         }
     });
 });

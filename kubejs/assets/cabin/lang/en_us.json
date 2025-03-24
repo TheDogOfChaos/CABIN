@@ -14,6 +14,8 @@
     "item.kubejs.incomplete_calculation_processor": "Incomplete Calculation Processor",
     "item.kubejs.incomplete_logic_processor": "Incomplete Logic Processor",
     "item.kubejs.incomplete_engineering_processor": "Incomplete Engineering Processor",
+    "item.kubejs.incomplete_flight_anchor": "Incomplete Flight Anchor",
+    "item.kubejs.incomplete_gravity_normalizer": "Incomplete Gravity Normalizer",
     "item.kubejs.zero": "Zero",
     "item.kubejs.one": "One",
     "item.kubejs.two": "Two",
@@ -216,5 +218,7 @@
     "item.kubejs.machine.details": "§7A machine, able to be transformed into a variety of useful gadgets and gizmos.",
     "item.kubejs.machine.transformation": "§7Machine Transformation can be automated with a Deployer or a Filtered Saw.",
     "item.kubejs.trial.details": "§7An odd form of copper caused by a reaction between Copper and Lumisense.",
-    "item.kubejs.trial.special_info": "§7It's far cheaper than regular copper but does not oxidize. Perfect for base building!"
+    "item.kubejs.trial.special_info": "§7It's far cheaper than regular copper but does not oxidize. Perfect for base building!",
+    "item.spirit_fire.info": "§7A mysterious fire that is capable of transmuation. Will never burn out.",
+    "item.spirit_fire.creation": "§7Created by igniting Demon's Dream Fruit with Flint and Steel."
 }

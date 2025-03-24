@@ -1,6 +1,6 @@
 ServerEvents.recipes(event => {
     let alchemy_mix = (output, catalyst, r1, r2, amount) => {
-        event.recipes.createMixing([Item.of(KJ("substrate_" + output, amount ? amount : 1)), KJ("substrate_" + catalyst)], [KJ("substrate_" + catalyst), KJ("substrate_" + r1, 2), KJ("substrate_" + r2)]).heated()
+        event.recipes.create.mixing([Item.of(KJ("substrate_" + output, amount ? amount : 1)), KJ("substrate_" + catalyst)], [KJ("substrate_" + catalyst), KJ("substrate_" + r1, 2), KJ("substrate_" + r2)]).heated()
     }
 
     let alchemy_smelt = (output, catalyst, r1, r2, amount) => {
@@ -21,14 +21,14 @@ ServerEvents.recipes(event => {
     alchemy_smelt("prismarine", "volatile", "blue", "cobblestone")
     alchemy_smelt("obsidian", "volatile", "magenta", "basalt")
 
-    alchemy_mix("arcane", "crystal", "nether", "magenta")
+    alchemy_mix("fluix", "crystal", "nether", "magenta")
     alchemy_mix("niter", "crystal", "blaze", "red")
     alchemy_mix("quartz", "crystal", "gunpowder", "orange")
     alchemy_mix("sulfur", "crystal", "slime", "yellow")
     alchemy_mix("apatite", "crystal", "prismarine", "green")
     alchemy_mix("certus", "crystal", "obsidian", "blue")
 
-    alchemy_smelt("lead", "metal", "arcane", "obsidian")
+    alchemy_smelt("lead", "metal", "fluix", "obsidian")
     alchemy_smelt("copper", "metal", "niter", "nether")
     alchemy_smelt("gold", "metal", "quartz", "blaze")
     alchemy_smelt("nickel", "metal", "sulfur", "gunpowder")

@@ -109,7 +109,7 @@ global.jeiCategories.alchemy.handlers.draw = function (jeiHelpers, recipe, recip
 
     matrixStack.translate(0, 20, 0);
 
-    AnimatedKinetics.defaultBlockElement(Block.getBlock("createdeco:green_industrial_iron_lamp").defaultBlockState().setValue(BlockStateProperties.FACING, Direction.DOWN).setValue(BlockStateProperties.LIT, new Boolean(true)))
+    AnimatedKinetics.defaultBlockElement(Block.getBlock("ad_astra:small_orange_industrial_lamp").defaultBlockState().setValue(BlockStateProperties.ATTACH_FACE, AttachFace.CEILING))
         .rotateBlock(0, 0, 0)
         .scale(20)
         .render(guiGraphics);

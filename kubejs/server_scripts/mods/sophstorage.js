@@ -27,16 +27,18 @@ ServerEvents.recipes(event => {
     const sophStorageMaterials = [
         ["", null, null],
         // ["copper_", "tconstruct:steel_ingot", "lead"],
-        ["iron_", "thermal:bronze_nugget"],
-        ["gold_", "thermal:invar_nugget"],
-        ["diamond_", "tconstruct:slimesteel_nugget"],
-        ["netherite_", "tconstruct:manyullyn_nugget"],
+        ["iron_", "bronze"],
+        ["gold_", "invar"],
+        ["diamond_", "slimesteel"],
+        ["netherite_", "manyullyn"],
     ]
     const sophStorageTypes = [
         ["", "barrel"],
         ["", "chest"],
         ["", "shulker_box"]
     ]
+
+    let upgradePattern = ["NIN", "NCN", "NIN"]
 
     sophStorageMaterials.forEach((material, toIndex) => {
         if (toIndex == 0) return;
@@ -47,12 +49,12 @@ ServerEvents.recipes(event => {
             let prevTierName = (toIndex - 1 == 0 ? "basic_" : sophStorageMaterials[toIndex - 1][0]);
             let toTierName = material[0];
 
-            donutCraft(
-                event,
-                `sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`,
-                (fromTierName == prevTierName ? "minecraft:redstone_torch" : `sophisticatedstorage:${fromTierName}to_${prevTierName}tier_upgrade`),
-                material[1]
-            ).id(`sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`)
+            event.shaped(`sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`,
+                upgradePattern, {
+                    N: `#forge:nuggets/${material[1]}`,
+                    I: `#forge:ingots/${material[1]}`,
+                    C: (fromTierName == prevTierName ? "minecraft:redstone_torch" : `sophisticatedstorage:${fromTierName}to_${prevTierName}tier_upgrade`),
+            }).id(`sophisticatedstorage:${fromTierName}to_${toTierName}tier_upgrade`)
         }
 
         // Barrel-in-table upgrades
@@ -69,14 +71,13 @@ ServerEvents.recipes(event => {
                         "itemRegistryName": outputStorage
                     }
                 ],
-                "pattern": [
-                    "III",
-                    "ICI",
-                    "III"
-                ],
+                "pattern": upgradePattern,
                 "key": {
+                    "N": {
+                        "tag": `forge:nuggets/${material[1]}`
+                    },
                     "I": {
-                        "item": (`${material[1]}`)
+                        "tag": `forge:ingots/${material[1]}`
                     },
                     "C": {
                         "item": inputStorage

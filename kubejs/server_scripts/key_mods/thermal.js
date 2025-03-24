@@ -24,8 +24,8 @@ ServerEvents.recipes(event => {
     event.replaceOutput({ id: TE("machines/pulverizer/pulverizer_ender_pearl") }, TE("ender_pearl_dust"), AE2("ender_dust"))
     event.replaceOutput({ id: TE("earth_charge/ender_pearl_dust_from_ender_pearl") }, TE("ender_pearl_dust"), AE2("ender_dust"))
     // Bitumen crushing recipes
-    event.recipes.createCrushing([Item.of(TE("bitumen")), Item.of(TE("bitumen"), 2).withChance(0.75), Item.of(TE("tar"), 1).withChance(0.75), Item.of(MC("sand")).withChance(0.25)], TE("oil_sand"))
-    event.recipes.createCrushing([Item.of(TE("bitumen")), Item.of(TE("bitumen"), 2).withChance(0.75), Item.of(TE("tar"), 1).withChance(0.75), Item.of(MC("red_sand")).withChance(0.25)], TE("oil_red_sand"))
+    event.recipes.create.crushing([Item.of(TE("bitumen")), Item.of(TE("bitumen"), 2).withChance(0.75), Item.of(TE("tar"), 1).withChance(0.75), Item.of(MC("sand")).withChance(0.25)], TE("oil_sand"))
+    event.recipes.create.crushing([Item.of(TE("bitumen")), Item.of(TE("bitumen"), 2).withChance(0.75), Item.of(TE("tar"), 1).withChance(0.75), Item.of(MC("red_sand")).withChance(0.25)], TE("oil_red_sand"))
     // ruby and sapphire block recipes
     let blockTemplate = [ "III", "III",	"III"	]
     event.shaped(TE("ruby_block", 1), blockTemplate, { I: F("#gems/ruby")	})

@@ -69,7 +69,7 @@ if (Platform.isLoaded("prettypipes")) {
             event.remove({ output: id })
             if (other_ingredient) {
                 event.smithing(Item.of(id, amount), "kubejs:attachment_base", other_ingredient)
-                event.recipes.createMechanicalCrafting(Item.of(id, amount), "AB", { A: "kubejs:attachment_base", B: other_ingredient })
+                event.recipes.create.mechanical_crafting(Item.of(id, amount), "AB", { A: "kubejs:attachment_base", B: other_ingredient })
             }
             else
                 event.stonecutting(Item.of(id, amount), "kubejs:attachment_base")

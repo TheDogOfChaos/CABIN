@@ -4,6 +4,7 @@
 let MOD = (domain, id, x) => (x ? `${x}x ` : "") + (id.startsWith("#") ? "#" : "") + domain + ":" + id.replace("#", "")
 let AE2 = (id, x) => MOD("ae2", id, x)
 let TE = (id, x) => MOD("thermal", id, x)
+let TR = (id, x) => MOD("trials", id, x)
 let AP = (id, x) => MOD("architects_palette", id, x)
 let CR = (id, x) => MOD("create", id, x)
 let TC = (id, x) => MOD("tconstruct", id, x)
@@ -168,7 +169,6 @@ StartupEvents.registry("item", event => {
         { in: RQ("nebulous_heart"), out: S(5) },
         { in: RQ("molten_core"), out: S(5) },
         { in: RQ("eye_of_the_storm"), out: S(12) },
-        { in: MC("phantom_membrane"), out: S(8) },
         { in: MC("rabbit_foot"), out: S(8) },
         { in: MC("nether_star"), out: G(1) },
         { in: MC("dragon_breath"), out: S(1) },
@@ -531,7 +531,7 @@ StartupEvents.registry("item", event => {
         simple("Frozen Core", RQ("frozen_core", 1), 48, S, 0x008DC2, 0x7571FB)
         simple("Nebulous Heart", RQ("nebulous_heart", 1), 1, G, 0x6200A0, 0xE500C3)
         simple("Guardian Spike", RQ("guardian_spike", 1), 1, G, 0x7F4215, 0xE29964)
-        simple("Phantom Membrane", MC("phantom_membrane", 1), 24, S, 0x6E506B, 0xC1B79F)
+        simple("Breeze Rod", TR("breeze_rod", 1), 24, S, 0x44557B, 0x96899E)
         simple("Blaze Cake", CR("blaze_cake", 1), 16, S, 0x834141, 0xFCE083)
         next_group()
 

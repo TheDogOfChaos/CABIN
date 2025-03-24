@@ -14,12 +14,32 @@ JEIEvents.hideItems(event => {
     event.hide(/ae2:.*_budding_quartz/)
     event.hide("architects_palette:withered_bone")
 
+    let begoneEarth = [
+        "tier_1_rover", "tier_2_rocket", "tier_3_rocket", "tier_4_rocket",
+        "steel_cable", "desh_cable", "desh_fluid_pipe", "ostrum_fluid_pipe", "cable_duct", "fluid_pipe_duct",
+        "coal_generator", "compressor", "etrionic_blast_furnace", "nasa_workbench", "fuel_refinery",
+        "water_pump", "energizer", "cryo_freezer",
+        "etrionic_capacitor",
+        "oxygen_gear", "wheel", "engine_frame", "fan", "rocket_nose_cone", "rocket_fin",
+        "etrionic_core", "photovoltaic_vesnium_cell",
+        "infernal_spire_block", "sky_stone",
+        "iron_plate",
+        "cryo_fuel_bucket"
+    ]
+    event.hide(begoneEarth.map(begone=>{return `ad_astra:${begone}`}))
+
+    event.hide(/^ad_astra:(netherite_space|jet_suit)_(helmet|suit|pants|boots)$/)
+    event.hide("ad_astra:jet_suit")
+    event.hide(/^ad_astra:(steel|desh|ostrum|calorite)_(tank|engine)$/)
     event.hide(/ad_astra:.*mars/)
     event.hide(/ad_astra:.*venus/)
     event.hide(/ad_astra:.*mercury/)
     event.hide(/ad_astra:.*glacio/)
-    event.hide(/^ad_astra:(steel|ostrum|calorite|desh)_(ingot|nugget|block|plate|tank|engine|fan)$/)
-    event.hide(["ad_astra:infernal_spire_block", "ad_astra:sky_stone", "ad_astra:permafrost", "ad_astra:wheel", "ad_astra:rocket_fin", "ad_astra:rocket_nose_cone", "ad_astra:oxygen_tank", "ad_astra:oxygen_gear", "ad_astra:hammer", "ad_astra:iron_plate", "ad_astra:coal_generator", "ad_astra:compressor", "ad_astra:fuel_refinery", "ad_astra:solar_panel", "ad_astra:water_pump", "ad_astra:nasa_workbench", "ad_astra:rover", "ad_astra:tier_2_rocket", "ad_astra:tier_3_rocket", "ad_astra:tier_4_rocket"])
+    event.hide(/^ad_astra:(?!photovoltaic).*(ostrum|calorite|etrium).*/)
+    event.hide(/^ad_astra:.*conglomerate.*/)
+    event.hide(/^ad_astra:.*permafrost.*/)
+    event.hide(/^(ad_astra|everycomp|supplementaries):.*(aeronos|strophar|glacian).*/)
+    event.hide(["ad_astra:deepslate_desh_ore", "ad_astra:deepslate_ice_shard_ore"])
 
     event.hide("biomesoplenty:blood")
 
@@ -153,4 +173,5 @@ JEIEvents.hideItems(event => {
 
 JEIEvents.hideFluids(event => {
     event.hide("tconstruct:molten_tin")
+    event.hide("ad_astra:cryo_fuel")
 })

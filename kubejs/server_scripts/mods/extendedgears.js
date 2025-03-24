@@ -14,7 +14,7 @@ if (Platform.isLoaded("extendedgears")) {
                     S: "#kubejs:saws",
                     G: cogs[i - 1]
                 })
-                event.recipes.createCutting(cogs[i], cogs[i - 1]).processingTime(150)
+                event.recipes.create.cutting(cogs[i], cogs[i - 1]).processingTime(150)
             }
         })
 

@@ -33,19 +33,19 @@ ServerEvents.recipes(event => {
     })
     // tweak obsidian crushing recipe
     event.remove({ id: CR("crushing/obsidian") })
-    event.recipes.createCrushing(CR("powdered_obsidian"), MC("obsidian"))
+    event.recipes.create.crushing(CR("powdered_obsidian"), MC("obsidian"))
     // recompacting obsidian dust into its resource
-    event.recipes.createCompacting(F("#dusts/obsidian"), MC("obsidian"))
+    event.recipes.create.compacting(F("#dusts/obsidian"), MC("obsidian"))
 
     // Gravel and red sand washing buffs
     event.remove({ id: CR("splashing/gravel") })
-    event.recipes.createSplashing([
+    event.recipes.create.splashing([
         Item.of(MC("iron_nugget", 2)).withChance(0.125),
         Item.of(MC("flint")).withChance(0.25)
     ], "minecraft:gravel")
 
     event.remove({ id: CR("splashing/red_sand") })
-    event.recipes.createSplashing([
+    event.recipes.create.splashing([
         Item.of(MC("gold_nugget", 2)).withChance(0.125),
         Item.of(MC("dead_bush")).withChance(0.05)
     ], "minecraft:red_sand")
